@@ -4,14 +4,31 @@
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+/* ---------- Header scroll effect ---------- */
+const header = document.querySelector('.site-header');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  if (currentScroll > 20) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+  lastScroll = currentScroll;
+});
+
 /* ---------- Mobile nav ---------- */
 const navToggle = document.getElementById('navToggle');
 navToggle.addEventListener('click', () => {
   const isOpen = document.body.classList.toggle('nav-open');
+  navToggle.classList.toggle('active');
   navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 });
 document.querySelectorAll('.nav a').forEach(link => {
-  link.addEventListener('click', () => document.body.classList.remove('nav-open'));
+  link.addEventListener('click', () => {
+    document.body.classList.remove('nav-open');
+    navToggle.classList.remove('active');
+  });
 });
 
 /* ---------- Áreas de actuação (objecto social) ---------- */
@@ -55,7 +72,6 @@ areas.forEach((name, i) => {
   svg.style.width = '100%';
   svg.style.height = '100%';
 
-  // Generate branching root/circuit paths from bottom, ending in leaf nodes
   const branches = [];
   function branch(x, y, angle, len, depth) {
     if (depth > 5 || len < 18) return;
@@ -103,7 +119,6 @@ areas.forEach((name, i) => {
       path.style.strokeDashoffset = '0';
     }));
 
-    // node dot at terminal branches
     if (b.depth >= 4 || Math.random() > 0.7) {
       const dot = document.createElementNS(NS, 'circle');
       dot.setAttribute('cx', b.x2);
