@@ -67,11 +67,22 @@ Se quiseres publicar sem sequer sair do GitHub:
 
 ---
 
-## Notas
-- O formulário de contacto neste momento abre o cliente de email (`mailto:`)
-  do visitante com a mensagem pré-preenchida, porque não está ligado a nenhum
-  serviço de backend. Para receber submissões diretamente (sem abrir o email
-  do visitante), pode integrar-se com Formspree, Getform ou um pequeno backend
-  — digam se querem que eu prepare isso.
-- O email de contacto usado (`geral@ecoaisolutions.co.mz`) é um placeholder —
-  substituir por um email real da empresa em `script.js`.
+## Configurar contactos e inscrições
+
+Tudo se configura no topo do `script.js`, no objecto `CONFIG`:
+
+```js
+const CONFIG = {
+  whatsapp: '258841234567',     // número com indicativo, só dígitos
+  email: 'geral@exemplo.co.mz', // email real da empresa
+  formspreeId: 'xyzabcd'        // código do formulário em formspree.io
+};
+```
+
+- **Formspree** (grátis, 50 envios por mês): criar conta em https://formspree.io,
+  criar um formulário novo e copiar o código que aparece em
+  `https://formspree.io/f/CODIGO`. As inscrições chegam ao email e ficam
+  guardadas no painel do Formspree (exportáveis para Excel/CSV).
+- Sem `formspreeId`, mas com `whatsapp`, a ficha abre o WhatsApp com os dados
+  já escritos e a pessoa só carrega em Enviar.
+- O WhatsApp e o email só aparecem na secção Contacto depois de preenchidos.

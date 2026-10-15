@@ -2,258 +2,394 @@
 <html lang="pt-MZ">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ECOAI SOLUTIONS, SU, SA — Tecnologia e Sustentabilidade em Moçambique</title>
-<meta name="description" content="ECOAI SOLUTIONS — sociedade moçambicana especializada em Inteligência Artificial, Cibersegurança, Software, Energias Renováveis e Tecnologias Verdes. Sediada em Morrumbene, Inhambane.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ECOAI SOLUTIONS — Formação e Tecnologia em Inhambane</title>
+<meta name="description" content="ECOAI SOLUTIONS, empresa moçambicana de tecnologia sediada em Morrumbene, Inhambane. Curso de Introdução à Programação com C++, sites, suporte informático e consultoria.">
+<meta property="og:title" content="ECOAI SOLUTIONS — Curso de Introdução à Programação com C++">
+<meta property="og:description" content="Inscrições abertas para a 1.ª turma em Morrumbene. 6 semanas, 24 horas, funciona no telemóvel.">
+<meta property="og:image" content="ecoai.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0F1E24">
+<link rel="icon" href="logo-ecoai.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="grain"></div>
-
-<header class="site-header" id="top">
+<header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="#top">
-      <!-- LOGO: Substitua o caminho pela sua imagem -->
-      <div class="brand-logo">
-        <img src="ecoai.png" alt="ECOAI SOLUTIONS Logo" class="logo-img">
-      </div>
-      <span class="brand-text">
-        ECOAI <span class="brand-thin">SOLUTIONS</span>
-      </span>
+    <a class="brand" href="#topo" aria-label="ECOAI SOLUTIONS, início">
+      <img src="logo-ecoai.svg" alt="" class="brand-mark" width="40" height="40">
+      <span class="brand-text">ECOAI <span>SOLUTIONS</span></span>
     </a>
-    <nav class="nav" aria-label="Navegação principal">
+    <nav class="nav" id="nav" aria-label="Navegação principal">
+      <a href="#curso">Curso C++</a>
+      <a href="#servicos">Serviços</a>
       <a href="#sobre">Sobre</a>
-      <a href="#areas">Áreas</a>
-      <a href="#eventos">Eventos</a>
-      <a href="#missao">Missão</a>
       <a href="#contacto">Contacto</a>
+      <a href="#inscricao" class="btn btn-primary btn-sm">Inscrever-me</a>
     </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="topo">
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-canvas" id="heroCanvas" aria-hidden="true"></div>
     <div class="wrap hero-inner">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        <span class="badge-text">Sede em Morrumbene, Inhambane</span>
+      <div class="hero-copy">
+        <p class="pill"><span class="pill-dot"></span>Inscrições abertas · 1.ª turma em Janeiro de 2027</p>
+        <h1>Tecnologia feita em Inhambane, para quem vive aqui.</h1>
+        <p class="hero-sub">
+          A ECOAI SOLUTIONS ensina programação, cria sites e dá suporte informático
+          a escolas, negócios e instituições a partir de Morrumbene.
+          Começamos pelo que mais falta faz: formar pessoas.
+        </p>
+        <div class="hero-cta">
+          <a href="#inscricao" class="btn btn-primary">Inscrever-me no curso de C++</a>
+          <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
+        </div>
       </div>
-      <h1 class="hero-title">
-        Onde a inteligência<br>
-        artificial <em>enraíza</em><br>
-        no território.
-      </h1>
-      <p class="hero-sub">
-        A ECOAI SOLUTIONS constrói tecnologia — software, dados, cibersegurança
-        e energia — pensada a partir de Moçambique, para crescer com o
-        território e não à custa dele.
-      </p>
-      <div class="hero-cta">
-        <a href="#areas" class="btn btn-primary">Ver áreas de actuação</a>
-        <a href="#contacto" class="btn btn-ghost">Falar connosco</a>
+
+      <figure class="code-card" aria-label="Exemplo do primeiro programa do curso">
+        <div class="code-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="code-file">aula1.cpp</span>
+        </div>
+<pre class="code"><code><span class="c-pre">#include</span> <span class="c-str">&lt;iostream&gt;</span>
+<span class="c-kw">using namespace</span> std;
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    string nome;
+    cout &lt;&lt; <span class="c-str">"Como te chamas? "</span>;
+    cin &gt;&gt; nome;
+    cout &lt;&lt; <span class="c-str">"Olá, "</span> &lt;&lt; nome
+         &lt;&lt; <span class="c-str">"! Bem-vindo à ECOAI."</span>;
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</code></pre>
+        <figcaption class="code-out">
+          <span class="out-label">Saída</span>
+          <span class="out-line">Como te chamas? <b>Amina</b></span>
+          <span class="out-line">Olá, Amina! Bem-vindo à ECOAI.<i class="caret" aria-hidden="true"></i></span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CURSO -->
+  <section class="section curso" id="curso">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Curso presencial · Morrumbene</p>
+        <h2>Introdução à Programação com C++</h2>
+        <p class="lede">
+          Seis semanas para escrever os teus primeiros programas, do zero.
+          Não é preciso saber programar nem ter computador: os exercícios
+          correm num compilador online que funciona no telemóvel.
+        </p>
+      </div>
+
+      <div class="curso-grid">
+        <dl class="facts">
+          <div><dt>Duração</dt><dd>6 semanas · 24 horas</dd></div>
+          <div><dt>Ritmo</dt><dd>2 aulas de 2 horas por semana</dd></div>
+          <div><dt>Início</dt><dd>Janeiro de 2027 <small>data exacta a anunciar</small></dd></div>
+          <div><dt>Local</dt><dd>Vila de Morrumbene <small>sala a anunciar</small></dd></div>
+          <div><dt>Turma</dt><dd>10 a 20 participantes</dd></div>
+          <div><dt>Inscrição</dt><dd>1.500 MT <small>50% para reservar a vaga, via M-Pesa ou e-Mola</small></dd></div>
+          <div class="facts-wide"><dt>No fim</dt><dd>Certificado ECOAI SOLUTIONS e um projecto teu para mostrar</dd></div>
+        </dl>
+
+        <div class="programa">
+          <h3>Programa</h3>
+          <ol class="semanas">
+            <li><span class="sem">Semana 1</span><span class="tema">Primeiro programa, <code>cout</code> e <code>cin</code></span><span class="res">Um programa que cumprimenta quem o usa</span></li>
+            <li><span class="sem">Semana 2</span><span class="tema">Variáveis, tipos e operadores</span><span class="res">Uma calculadora simples</span></li>
+            <li><span class="sem">Semana 3</span><span class="tema">Decisões: <code>if</code>, <code>else</code>, <code>switch</code></span><span class="res">Aprovado ou reprovado, a partir das notas</span></li>
+            <li><span class="sem">Semana 4</span><span class="tema">Repetições: <code>for</code> e <code>while</code></span><span class="res">Tabuada e jogo de adivinhar o número</span></li>
+            <li><span class="sem">Semana 5</span><span class="tema">Funções e vectores</span><span class="res">Gestão das notas de uma turma</span></li>
+            <li><span class="sem">Semana 6</span><span class="tema">Projecto final e apresentação</span><span class="res">Mini-sistema de stock para uma loja local</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="para-quem">
+        <h3>Para quem é</h3>
+        <ul>
+          <li>Estudantes do ensino secundário e universitário</li>
+          <li>Professores que querem ensinar tecnologia</li>
+          <li>Jovens à procura de uma nova competência para o emprego</li>
+          <li>Qualquer pessoa curiosa, a partir dos 14 anos</li>
+        </ul>
       </div>
     </div>
-    <div class="hero-scroll" aria-hidden="true">
-      <span></span>
-      <p>percorrer</p>
+  </section>
+
+  <!-- INSCRIÇÃO -->
+  <section class="section inscricao" id="inscricao">
+    <div class="wrap inscricao-grid">
+      <div class="inscricao-intro">
+        <p class="eyebrow">Ficha de inscrição</p>
+        <h2>Reserva a tua vaga</h2>
+        <p>
+          Preenche a ficha. Em até 48 horas contactamos-te por WhatsApp para
+          confirmar a vaga, o horário e o pagamento do sinal.
+        </p>
+        <ol class="passos">
+          <li>Envias a ficha</li>
+          <li>Confirmamos por WhatsApp</li>
+          <li>Pagas 750 MT de sinal e a vaga fica tua</li>
+        </ol>
+      </div>
+
+      <form class="form" id="inscricaoForm" novalidate>
+        <input type="hidden" name="_subject" value="Nova inscrição: Curso de C++">
+        <input type="hidden" name="curso" value="Introdução à Programação com C++ (1.ª turma)">
+
+        <div class="field">
+          <label for="i-nome">Nome completo</label>
+          <input id="i-nome" name="nome" type="text" autocomplete="name" required>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="i-tel">Telefone / WhatsApp</label>
+            <input id="i-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="84 123 4567" required>
+          </div>
+          <div class="field">
+            <label for="i-email">Email <span class="opt">(opcional)</span></label>
+            <input id="i-email" name="email" type="email" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="i-idade">Idade</label>
+            <input id="i-idade" name="idade" type="number" min="12" max="90" inputmode="numeric" required>
+          </div>
+          <div class="field">
+            <label for="i-local">Onde vives</label>
+            <select id="i-local" name="localidade" required>
+              <option value="">Escolhe…</option>
+              <option>Morrumbene</option>
+              <option>Maxixe</option>
+              <option>Cidade de Inhambane</option>
+              <option>Massinga</option>
+              <option>Homoíne</option>
+              <option>Outro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="i-ocup">Ocupação</label>
+            <select id="i-ocup" name="ocupacao" required>
+              <option value="">Escolhe…</option>
+              <option>Estudante do secundário</option>
+              <option>Estudante universitário</option>
+              <option>Professor(a)</option>
+              <option>Trabalhador(a)</option>
+              <option>À procura de emprego</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="i-esc">Escolaridade</label>
+            <select id="i-esc" name="escolaridade" required>
+              <option value="">Escolhe…</option>
+              <option>Até 10.ª classe</option>
+              <option>11.ª ou 12.ª classe</option>
+              <option>Técnico-profissional</option>
+              <option>Ensino superior (a frequentar)</option>
+              <option>Ensino superior (concluído)</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="field choice">
+          <legend>Já programaste antes?</legend>
+          <label><input type="radio" name="experiencia" value="Nunca" required> Nunca</label>
+          <label><input type="radio" name="experiencia" value="Um pouco"> Um pouco</label>
+          <label><input type="radio" name="experiencia" value="Sim"> Sim</label>
+        </fieldset>
+
+        <fieldset class="field choice">
+          <legend>Com que vais praticar?</legend>
+          <label><input type="radio" name="equipamento" value="Portátil" required> Portátil</label>
+          <label><input type="radio" name="equipamento" value="Só telemóvel"> Só telemóvel</label>
+          <label><input type="radio" name="equipamento" value="Nenhum"> Ainda não tenho</label>
+        </fieldset>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="i-hor">Horário preferido</label>
+            <select id="i-hor" name="horario" required>
+              <option value="">Escolhe…</option>
+              <option>Sábado de manhã</option>
+              <option>Dias úteis, fim da tarde</option>
+              <option>Tanto faz</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="i-orig">Como soubeste do curso?</label>
+            <select id="i-orig" name="origem">
+              <option value="">Escolhe…</option>
+              <option>WhatsApp</option>
+              <option>Facebook</option>
+              <option>Escola ou universidade</option>
+              <option>Rádio</option>
+              <option>Cartaz</option>
+              <option>Amigo ou familiar</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="i-obs">Alguma pergunta ou observação? <span class="opt">(opcional)</span></label>
+          <textarea id="i-obs" name="observacoes" rows="3"></textarea>
+        </div>
+
+        <label class="consent" for="i-cons">
+          <input id="i-cons" name="consentimento" type="checkbox" value="Sim" required>
+          <span>Aceito que a ECOAI SOLUTIONS use estes dados só para gerir a minha inscrição e me contactar sobre o curso.</span>
+        </label>
+
+        <p class="form-error" id="inscricaoErro" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primary btn-block" id="inscricaoBtn">Enviar inscrição</button>
+
+        <div class="form-done" id="inscricaoOk" role="status" hidden>
+          <h3>Inscrição recebida</h3>
+          <p id="inscricaoOkMsg">Obrigado. Vamos contactar-te por WhatsApp em até 48 horas.</p>
+          <a class="btn btn-ghost" id="inscricaoWa" href="#" target="_blank" rel="noopener" hidden>Abrir WhatsApp</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="section servicos" id="servicos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Serviços</p>
+        <h2>O que fazemos para escolas, negócios e instituições</h2>
+      </div>
+      <div class="servicos-grid">
+        <article class="servico">
+          <h3>Formação em tecnologia</h3>
+          <p>Cursos de programação, informática na óptica do utilizador, Excel e uso de inteligência artificial no trabalho. Para turmas abertas ou equipas de uma instituição.</p>
+        </article>
+        <article class="servico">
+          <h3>Sites e presença digital</h3>
+          <p>Sites rápidos para lodges, restaurantes e lojas, perfil no Google Maps e páginas nas redes sociais, com manutenção mensal.</p>
+        </article>
+        <article class="servico">
+          <h3>Computadores e redes</h3>
+          <p>Instalação e manutenção de computadores, redes e internet para escolas, ONGs, administrações e pequenas empresas.</p>
+        </article>
+        <article class="servico">
+          <h3>Software e dados</h3>
+          <p>Sistemas simples à medida (stock, notas, registos), análise de dados e consultoria em tecnologias de informação.</p>
+        </article>
+      </div>
+      <p class="servicos-cta">Precisa de um orçamento? <a href="#contacto">Fale connosco</a> e respondemos em 48 horas.</p>
     </div>
   </section>
 
   <!-- SOBRE -->
   <section class="section sobre" id="sobre">
-    <div class="wrap grid-2">
-      <div class="sobre-lede">
-        <p class="eyebrow">01 — Sobre a sociedade</p>
-        <h2>Uma sociedade unipessoal,<br>um propósito colectivo.</h2>
-      </div>
-      <div class="sobre-body">
+    <div class="wrap sobre-grid">
+      <div>
+        <p class="eyebrow">Sobre a empresa</p>
+        <h2>Eco de economia local, AI de inteligência artificial</h2>
         <p>
-          A <strong>ECOAI SOLUTIONS, SU, SA</strong> foi constituída a 1 de Janeiro
-          de 2025 e matriculada na Conservatória do Registo das Entidades Legais
-          de Maxixe sob o NUEL 105039425. É uma sociedade unipessoal anónima,
-          fundada e administrada por <strong>Jovens</strong>, com sede
-          na vila de Morrumbene, distrito de Morrumbene, província de Inhambane.
+          A ECOAI SOLUTIONS, SU, SA é uma empresa moçambicana de tecnologia,
+          constituída a 1 de Janeiro de 2025 e com sede na vila de Morrumbene,
+          província de Inhambane. Acreditamos que a tecnologia deve criar
+          competências e emprego no lugar onde é usada.
         </p>
-        <p>
-          O nome carrega a tese da empresa: <strong>Eco</strong> de ecologia e
-          economia local, <strong>AI</strong> de inteligência artificial. Duas
-          forças que, na maior parte do mundo, avançam em direcções opostas —
-          e que aqui trabalham na mesma equação.
-        </p>
-        <dl class="facts">
-          <div>
-            <dt>Constituição</dt>
-            <dd>1 de Janeiro de 2025</dd>
-          </div>
-          <div>
-            <dt>Forma jurídica</dt>
-            <dd>Sociedade Unipessoal Anónima</dd>
-          </div>
-          <div>
-            <dt>Sede</dt>
-            <dd>Morrumbene, Inhambane</dd>
-          </div>
-          <div>
-            <dt>Duração</dt>
-            <dd>Indeterminada</dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-  </section>
-
-  <!-- ÁREAS -->
-  <section class="section areas" id="areas">
-    <div class="wrap">
-      <p class="eyebrow">02 — Objecto social</p>
-      <h2 class="areas-title">Catorze ramos,<br>uma só raiz.</h2>
-      <p class="areas-intro">
-        O contrato de sociedade define um objecto social amplo — reflexo de uma
-        aposta: tecnologia séria não se faz num só nicho. Eis os ramos em que a
-        ECOAI SOLUTIONS está autorizada e activa a operar.
-      </p>
-
-      <div class="areas-grid" id="areasGrid">
-        <!-- populated by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- EVENTOS PARCEIROS -->
-  <section class="section eventos" id="eventos">
-    <div class="wrap">
-      <p class="eyebrow">03 — Eventos parceiros</p>
-      <h2 class="eventos-title">Construindo a comunidade<br>tecnológica em Moçambique</h2>
-      <p class="eventos-intro">
-        A ECOAI SOLUTIONS acredita que a inovação se constrói em rede. Por isso,
-        participamos activamente como parceiros nos principais eventos de tecnologia
-        do país.
-      </p>
-
-      <div class="eventos-grid">
-        <div class="evento-card">
-          <div class="evento-icon"></div>
-          <div class="evento-content">
-            <span class="evento-tag">Parceiro</span>
-            <h3 class="evento-nome">IndabaX Moçambique</h3>
-            <p class="evento-desc">
-              O maior encontro de Inteligência Artificial e Ciência de Dados em Moçambique.
-              A ECOAI SOLUTIONS marca presença como parceira, contribuindo para o
-              fortalecimento do ecossistema de dados no país.
-            </p>
-            <div class="evento-local">
-              <span>📍</span>
-              <span>Deep Learning</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="evento-card">
-          <div class="evento-icon">💻</div>
-          <div class="evento-content">
-            <span class="evento-tag">Parceiro</span>
-            <h3 class="evento-nome">Hack4Dev</h3>
-            <p class="evento-desc">
-              Uma competição de inovação que desafia mentes criativas a desenvolver
-              soluções tecnológicas para problemas reais. Como parceiros, apoiamos
-              a formação de talentos locais.
-            </p>
-            <div class="evento-local">
-              <span>📍</span>
-              <span>Ciencia de Dados</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="eventos-cta">
-        <p class="eventos-cta-text">Interessado em parcerias? Vamos conversar.</p>
-        <a href="#contacto" class="btn btn-primary">Entrar em contacto</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- MISSÃO -->
-  <section class="section missao" id="missao">
-    <div class="wrap grid-2 reverse">
-      <div class="missao-visual" aria-hidden="true">
-        <svg viewBox="0 0 300 300" class="missao-svg">
-          <circle cx="150" cy="150" r="118" class="ring ring-1"/>
-          <circle cx="150" cy="150" r="86" class="ring ring-2"/>
-          <circle cx="150" cy="150" r="54" class="ring ring-3"/>
-          <g class="missao-leaf">
-            <path d="M150 150 L150 90" class="mark-stem"/>
-            <path d="M150 90 C120 90 108 60 114 36 C144 36 168 60 150 90 Z" class="mark-leaf"/>
-          </g>
-        </svg>
-      </div>
-      <div class="missao-body">
-        <p class="eyebrow">04 — Missão</p>
-        <h2>Tecnologia que se mede<br>pelo que deixa, não só<br>pelo que entrega.</h2>
-        <p>
-          Trabalhamos consultoria, investigação e desenvolvimento em tecnologias
-          avançadas partindo de um princípio simples: uma solução de IA,
-          automação ou infraestrutura só está terminada quando resiste às
-          condições reais do território — rede instável, recursos limitados,
-          capacidade local a formar-se.
-        </p>
-        <ul class="values">
-          <li><span>Local primeiro</span>Soluções desenhadas para operar nas condições de Moçambique, não adaptadas depois.</li>
-          <li><span>Capacitação</span>Cada projecto deixa competência instalada — formação e transferência de conhecimento fazem parte do objecto social.</li>
-          <li><span>Sustentabilidade</span>Energia renovável e eficiência energética como critério de desenho, não como extra.</li>
+        <ul class="valores">
+          <li><b>Local primeiro.</b> Soluções pensadas para a rede, a energia e os recursos que existem aqui.</li>
+          <li><b>Capacitação.</b> Cada projecto deixa pessoas formadas, não só um produto entregue.</li>
+          <li><b>Sustentabilidade.</b> Energia renovável e eficiência como critério desde o início.</li>
         </ul>
+      </div>
+
+      <div class="sobre-side">
+        <dl class="ficha">
+          <div><dt>Forma jurídica</dt><dd>Sociedade Unipessoal, Sociedade Anónima</dd></div>
+          <div><dt>NUEL</dt><dd>105039425</dd></div>
+          <div><dt>Registo</dt><dd>Conservatória do Registo das Entidades Legais de Maxixe</dd></div>
+          <div><dt>Publicação</dt><dd>Boletim da República n.º 55, III Série, 21/03/2025</dd></div>
+          <div><dt>Administrador</dt><dd>Jean Marie John</dd></div>
+        </dl>
+
+        <details class="ramos">
+          <summary>Ver os 16 ramos do objecto social</summary>
+          <ul id="ramosLista"></ul>
+        </details>
+
+        <div class="comunidade">
+          <h3>Comunidade</h3>
+          <p>Participamos como parceiros em eventos que formam talento tecnológico em Moçambique:</p>
+          <ul>
+            <li><b>IndabaX Moçambique</b>, encontro de inteligência artificial e ciência de dados</li>
+            <li><b>Hack4Dev</b>, competição de inovação para problemas reais</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACTO -->
   <section class="section contacto" id="contacto">
-    <div class="wrap">
-      <p class="eyebrow">05 — Contacto</p>
-      <h2 class="contacto-title">Vamos construir<br>a partir daqui.</h2>
-      <div class="contacto-grid">
-        <div class="contacto-info">
-          <div class="info-block">
-            <span class="info-label">Sede social</span>
-            <p>Bairro de Jogo, Vila de Morrumbene<br>Distrito de Morrumbene, Inhambane<br>Moçambique</p>
-          </div>
-          <div class="info-block">
-            <span class="info-label">Administração</span>
-            <p>Jovens<br>Sócios</p>
-          </div>
-          <div class="info-block">
-            <span class="info-label">Registo</span>
-            <p>Registado na <br>Conservatória de Maxixe</p>
-          </div>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <p class="form-note">Este formulário ainda não está ligado a um serviço de envio — abre o teu cliente de email com a mensagem pronta.</p>
-          <label>
-            Nome
-            <input type="text" name="nome" required>
-          </label>
-          <label>
-            Email
-            <input type="email" name="email" required>
-          </label>
-          <label>
-            Mensagem
-            <textarea name="mensagem" rows="4" required></textarea>
-          </label>
-          <button type="submit" class="btn btn-primary">Enviar mensagem</button>
-        </form>
+    <div class="wrap contacto-grid">
+      <div>
+        <p class="eyebrow">Contacto</p>
+        <h2>Fale connosco</h2>
+        <ul class="canais">
+          <li data-canal="whatsapp" hidden>
+            <span class="canal-label">WhatsApp</span>
+            <a id="waLink" href="#" target="_blank" rel="noopener"></a>
+          </li>
+          <li data-canal="email" hidden>
+            <span class="canal-label">Email</span>
+            <a id="emailLink" href="#"></a>
+          </li>
+          <li>
+            <span class="canal-label">Sede</span>
+            <span>Bairro de Jogo, Vila de Morrumbene<br>Distrito de Morrumbene, Inhambane, Moçambique</span>
+          </li>
+        </ul>
       </div>
+
+      <form class="form" id="contactoForm" novalidate>
+        <input type="hidden" name="_subject" value="Contacto pelo site ECOAI">
+        <div class="field">
+          <label for="c-nome">Nome</label>
+          <input id="c-nome" name="nome" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="c-tel">Telefone ou email</label>
+          <input id="c-tel" name="contacto" type="text" required>
+        </div>
+        <div class="field">
+          <label for="c-msg">Mensagem</label>
+          <textarea id="c-msg" name="mensagem" rows="4" required></textarea>
+        </div>
+        <p class="form-error" id="contactoErro" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primary" id="contactoBtn">Enviar mensagem</button>
+        <div class="form-done" id="contactoOk" role="status" hidden>
+          <h3>Mensagem enviada</h3>
+          <p id="contactoOkMsg">Obrigado. Respondemos em até 48 horas.</p>
+          <a class="btn btn-ghost" id="contactoWa" href="#" target="_blank" rel="noopener" hidden>Abrir WhatsApp</a>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -262,13 +398,11 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo">
-        <img src="logo-ecoai.png" alt="ECOAI SOLUTIONS" class="footer-logo-img">
-      </div>
+      <img src="logo-ecoai.svg" alt="" width="28" height="28">
       <span>ECOAI SOLUTIONS, SU, SA</span>
     </div>
-    <p class="footer-legal">Jogo, Morrumbene, Inhambane, Moçambique · Constituída a 01/01/2025</p>
-    <p class="footer-copy">© <span id="year"></span> ECOAI SOLUTIONS. Todos os direitos reservados.</p>
+    <p>NUEL 105039425 · Jogo, Morrumbene, Inhambane, Moçambique</p>
+    <p>© <span id="year">2026</span> ECOAI SOLUTIONS</p>
   </div>
 </footer>
 

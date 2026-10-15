@@ -1,170 +1,211 @@
 // ============================================================
-// ECOAI SOLUTIONS — interactivity
+// ECOAI SOLUTIONS — configuração e interactividade
 // ============================================================
 
-document.getElementById('year').textContent = new Date().getFullYear();
+/* ---------- CONFIGURAÇÃO: altere só aqui ----------
+   whatsapp:    número com indicativo, só dígitos. Ex.: '258841234567'
+   email:       email real da empresa
+   formspreeId: código do formulário em formspree.io (ex.: 'xyzabcd').
+                Enquanto estiver vazio, as inscrições seguem por WhatsApp. */
+const CONFIG = {
+  whatsapp: '',
+  email: '',
+  formspreeId: ''
+};
+// ---------------------------------------------------
 
-/* ---------- Header scroll effect ---------- */
-const header = document.querySelector('.site-header');
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset;
-  if (currentScroll > 20) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-  lastScroll = currentScroll;
-});
+const $ = (sel, root = document) => root.querySelector(sel);
 
-/* ---------- Mobile nav ---------- */
-const navToggle = document.getElementById('navToggle');
+$('#year').textContent = new Date().getFullYear();
+
+/* ---------- menu no telemóvel ---------- */
+const navToggle = $('#navToggle');
 navToggle.addEventListener('click', () => {
-  const isOpen = document.body.classList.toggle('nav-open');
-  navToggle.classList.toggle('active');
-  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  const open = document.body.classList.toggle('nav-open');
+  navToggle.setAttribute('aria-expanded', String(open));
+  navToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
 });
-document.querySelectorAll('.nav a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.body.classList.remove('nav-open');
-    navToggle.classList.remove('active');
-  });
-});
+document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () => {
+  document.body.classList.remove('nav-open');
+  navToggle.setAttribute('aria-expanded', 'false');
+  navToggle.setAttribute('aria-label', 'Abrir menu');
+}));
 
-/* ---------- Áreas de actuação (objecto social) ---------- */
-const areas = [
-  "Tecnologia e Inovação",
-  "Redes e Infraestrutura Tecnológica",
-  "Desenvolvimento, Comercialização e Manutenção de Software e Aplicações",
-  "Inteligência Artificial e Ciência de Dados",
-  "Segurança de Dados e Cibersegurança",
-  "Sustentabilidade Ambiental e Tecnologias Verdes",
-  "Educação e Capacitação Tecnológica",
-  "Consultoria em Tecnologia da Informação e Comunicação",
-  "Pesquisa e Desenvolvimento em Tecnologias Avançadas",
-  "Soluções de Energia Renovável e Eficiência Energética",
-  "Automação e Internet das Coisas",
-  "Gestão e Análise de Dados",
-  "Tecnologias para Agricultura de Precisão e Agroindústria",
-  "Realidade Virtual, Aumentada e Tecnologias Imersivas",
-  "Organização e Apoio a Eventos Tecnológicos",
-  "Parcerias e Acolhimento de Programas Tecnológicos"
+/* ---------- objecto social (Boletim da República n.º 55, III Série) ---------- */
+const ramos = [
+  'Tecnologia e inovação',
+  'Redes e infra-estrutura tecnológica',
+  'Desenvolvimento, comercialização e manutenção de software e aplicações',
+  'Inteligência artificial e ciência de dados',
+  'Segurança de dados e cibersegurança',
+  'Sustentabilidade ambiental e tecnologias verdes',
+  'Educação e capacitação tecnológica',
+  'Consultoria em tecnologia da informação e comunicação',
+  'Pesquisa e desenvolvimento em tecnologias avançadas',
+  'Soluções de energia renovável e eficiência energética',
+  'Automação e internet das coisas',
+  'Gestão e análise de dados',
+  'Tecnologias para agricultura de precisão e agro-indústria',
+  'Realidade virtual, realidade aumentada e tecnologias imersivas',
+  'Organização, promoção e apoio a eventos tecnológicos',
+  'Parcerias e acolhimento de programas e iniciativas tecnológicas'
 ];
+const lista = $('#ramosLista');
+ramos.forEach(r => { const li = document.createElement('li'); li.textContent = r; lista.appendChild(li); });
 
-const grid = document.getElementById('areasGrid');
-areas.forEach((name, i) => {
-  const card = document.createElement('div');
-  card.className = 'area-card';
-  card.innerHTML = `
-    <span class="area-num">${String(i + 1).padStart(2, '0')}</span>
-    <span class="area-name">${name}</span>
-  `;
-  grid.appendChild(card);
-});
+/* ---------- contactos ---------- */
+const waDigits = CONFIG.whatsapp.replace(/\D/g, '');
+const waUrl = text => `https://wa.me/${waDigits}?text=${encodeURIComponent(text)}`;
+function formatPhone(d) {
+  // 258841234567 -> +258 84 123 4567
+  return d.startsWith('258') && d.length === 12
+    ? `+258 ${d.slice(3, 5)} ${d.slice(5, 8)} ${d.slice(8)}`
+    : `+${d}`;
+}
+if (waDigits) {
+  const a = $('#waLink');
+  a.href = waUrl('Olá ECOAI SOLUTIONS, gostaria de mais informações.');
+  a.textContent = formatPhone(waDigits);
+  $('[data-canal="whatsapp"]').hidden = false;
+}
+if (CONFIG.email) {
+  const a = $('#emailLink');
+  a.href = `mailto:${CONFIG.email}`;
+  a.textContent = CONFIG.email;
+  $('[data-canal="email"]').hidden = false;
+}
 
-/* ---------- Hero canvas: growing circuit-root motif ---------- */
-(function heroCanvas() {
-  const container = document.getElementById('heroCanvas');
-  const NS = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(NS, 'svg');
-  svg.setAttribute('viewBox', '0 0 1200 800');
-  svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-  svg.style.width = '100%';
-  svg.style.height = '100%';
-
-  const branches = [];
-  function branch(x, y, angle, len, depth) {
-    if (depth > 5 || len < 18) return;
-    const rad = (angle * Math.PI) / 180;
-    const x2 = x + Math.cos(rad) * len;
-    const y2 = y + Math.sin(rad) * len;
-    branches.push({ x1: x, y1: y, x2, y2, depth });
-    if (Math.random() > 0.15) {
-      branch(x2, y2, angle - (14 + Math.random() * 18), len * 0.8, depth + 1);
+/* ---------- validação ---------- */
+function validate(form) {
+  let first = null;
+  form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+  const seenRadio = new Set();
+  form.querySelectorAll('[required]').forEach(el => {
+    let bad = false;
+    let mark = el;
+    if (el.type === 'radio') {
+      if (seenRadio.has(el.name)) return;
+      seenRadio.add(el.name);
+      bad = !form.querySelector(`input[name="${el.name}"]:checked`);
+      mark = el.closest('fieldset');
+    } else if (el.type === 'checkbox') {
+      bad = !el.checked;
+      mark = el.closest('label');
+    } else if (el.type === 'tel') {
+      bad = el.value.replace(/\D/g, '').length < 9;
+    } else {
+      bad = !el.value.trim() || !el.checkValidity();
     }
-    if (Math.random() > 0.15) {
-      branch(x2, y2, angle + (14 + Math.random() * 18), len * 0.8, depth + 1);
+    if (bad) {
+      mark.classList.add('invalid');
+      if (!first) first = el;
     }
+  });
+  const emailEl = form.querySelector('input[type="email"]');
+  if (emailEl && emailEl.value && !emailEl.checkValidity()) {
+    emailEl.classList.add('invalid');
+    if (!first) first = emailEl;
   }
+  return first;
+}
 
-  const startPoints = [140, 420, 700, 980, 1120];
-  startPoints.forEach((sx, i) => {
-    branch(sx, 800, -90 + (i % 2 === 0 ? -6 : 6), 130 + Math.random() * 40, 0);
+function summary(form, title) {
+  const labels = {
+    nome: 'Nome', telefone: 'Telefone', email: 'Email', idade: 'Idade',
+    localidade: 'Localidade', ocupacao: 'Ocupação', escolaridade: 'Escolaridade',
+    experiencia: 'Já programou', equipamento: 'Vai praticar com', horario: 'Horário',
+    origem: 'Soube por', observacoes: 'Observações', contacto: 'Contacto', mensagem: 'Mensagem'
+  };
+  const lines = [title];
+  new FormData(form).forEach((v, k) => {
+    if (labels[k] && String(v).trim()) lines.push(`${labels[k]}: ${v}`);
   });
+  return lines.join('\n');
+}
 
-  let maxLen = 0;
-  branches.forEach(b => {
-    const l = Math.hypot(b.x2 - b.x1, b.y2 - b.y1);
-    b.length = l;
-    maxLen += l;
-  });
+/* ---------- envio (Formspree, ou WhatsApp como alternativa) ---------- */
+function setupForm({ form, btn, err, done, doneMsg, doneWa, waTitle, okText }) {
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    err.hidden = true;
+    const first = validate(form);
+    if (first) {
+      err.textContent = 'Falta preencher os campos assinalados a vermelho.';
+      err.hidden = false;
+      first.focus();
+      return;
+    }
+    const text = summary(form, waTitle);
 
-  let cumulative = 0;
-  branches.forEach((b, idx) => {
-    const path = document.createElementNS(NS, 'line');
-    path.setAttribute('x1', b.x1);
-    path.setAttribute('y1', b.y1);
-    path.setAttribute('x2', b.x2);
-    path.setAttribute('y2', b.y2);
-    path.setAttribute('stroke', b.depth > 3 ? '#49C9A6' : '#E0BE63');
-    path.setAttribute('stroke-width', Math.max(0.6, 2.6 - b.depth * 0.4));
-    path.setAttribute('stroke-linecap', 'round');
-    path.setAttribute('opacity', b.depth > 3 ? '0.55' : '0.8');
-    path.style.strokeDasharray = b.length;
-    path.style.strokeDashoffset = b.length;
-    path.style.transition = `stroke-dashoffset 1.1s ${(cumulative / maxLen) * 1.6}s cubic-bezier(.22,.68,.32,1)`;
-    svg.appendChild(path);
-    cumulative += b.length;
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      path.style.strokeDashoffset = '0';
-    }));
+    if (CONFIG.formspreeId) {
+      btn.disabled = true;
+      btn.textContent = 'A enviar…';
+      try {
+        const res = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form)
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        doneMsg.textContent = okText;
+        if (waDigits) { doneWa.href = waUrl(text); doneWa.textContent = 'Enviar também por WhatsApp'; doneWa.hidden = false; }
+        finish();
+        return;
+      } catch (_) {
+        btn.disabled = false;
+        btn.textContent = 'Tentar de novo';
+        if (!waDigits) {
+          err.textContent = 'Não foi possível enviar. Verifica a internet e tenta de novo.';
+          err.hidden = false;
+          return;
+        }
+      }
+    }
 
-    if (b.depth >= 4 || Math.random() > 0.7) {
-      const dot = document.createElementNS(NS, 'circle');
-      dot.setAttribute('cx', b.x2);
-      dot.setAttribute('cy', b.y2);
-      dot.setAttribute('r', 2.5);
-      dot.setAttribute('fill', '#E0BE63');
-      dot.setAttribute('opacity', '0');
-      dot.style.transition = `opacity .6s ${(cumulative / maxLen) * 1.6 + 0.4}s`;
-      svg.appendChild(dot);
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        dot.setAttribute('opacity', '0.9');
-      }));
+    if (waDigits) {
+      doneWa.href = waUrl(text);
+      doneWa.textContent = 'Abrir WhatsApp e enviar';
+      doneWa.hidden = false;
+      doneMsg.textContent = 'Falta um passo: abre o WhatsApp com os teus dados já escritos e carrega em Enviar.';
+      finish();
+      window.open(doneWa.href, '_blank', 'noopener');
+      return;
+    }
+
+    err.textContent = 'As inscrições online abrem em breve. Volta a tentar dentro de alguns dias.';
+    err.hidden = false;
+
+    function finish() {
+      [...form.children].forEach(el => { if (el !== done) el.hidden = true; });
+      done.hidden = false;
+      done.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   });
+  form.addEventListener('input', e => {
+    const t = e.target;
+    t.classList.remove('invalid');
+    t.closest('.invalid')?.classList.remove('invalid');
+  });
+}
 
-  container.appendChild(svg);
-})();
-
-/* ---------- Contact form: mailto fallback ---------- */
-const form = document.getElementById('contactForm');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const data = new FormData(form);
-  const nome = data.get('nome');
-  const email = data.get('email');
-  const mensagem = data.get('mensagem');
-  const subject = encodeURIComponent(`Contacto via site — ${nome}`);
-  const body = encodeURIComponent(`Nome: ${nome}\nEmail: ${email}\n\nMensagem:\n${mensagem}`);
-  window.location.href = `mailto:geral@ecoaisolutions.co.mz?subject=${subject}&body=${body}`;
+setupForm({
+  form: $('#inscricaoForm'),
+  btn: $('#inscricaoBtn'),
+  err: $('#inscricaoErro'),
+  done: $('#inscricaoOk'),
+  doneMsg: $('#inscricaoOkMsg'),
+  doneWa: $('#inscricaoWa'),
+  waTitle: 'Inscrição: Introdução à Programação com C++',
+  okText: 'Obrigado. Vamos contactar-te por WhatsApp em até 48 horas para confirmar a vaga.'
 });
 
-/* ---------- Reveal-on-scroll for sections ---------- */
-const revealables = document.querySelectorAll('.section > .wrap');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-      io.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-revealables.forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(24px)';
-  el.style.transition = 'opacity .7s cubic-bezier(.22,.68,.32,1), transform .7s cubic-bezier(.22,.68,.32,1)';
-  io.observe(el);
+setupForm({
+  form: $('#contactoForm'),
+  btn: $('#contactoBtn'),
+  err: $('#contactoErro'),
+  done: $('#contactoOk'),
+  doneMsg: $('#contactoOkMsg'),
+  doneWa: $('#contactoWa'),
+  waTitle: 'Contacto pelo site ECOAI',
+  okText: 'Obrigado. Respondemos em até 48 horas.'
 });
