@@ -8,9 +8,9 @@
    formspreeId: código do formulário em formspree.io (ex.: 'xyzabcd').
                 Enquanto estiver vazio, as inscrições seguem por WhatsApp. */
 const CONFIG = {
-  whatsapp: '',
-  email: '',
-  formspreeId: ''
+  whatsapp: '258843813137',
+  email: 'ecoaisolutionssusa@gmail.com',
+  formspreeId: 'mgaorvrw'
 };
 // ---------------------------------------------------
 
@@ -196,7 +196,7 @@ setupForm({
   doneMsg: $('#inscricaoOkMsg'),
   doneWa: $('#inscricaoWa'),
   waTitle: 'Inscrição: Introdução à Programação com C++',
-  okText: 'Obrigado. Vamos contactar-te por WhatsApp em até 48 horas para confirmar a vaga.'
+  okText: 'Obrigado. Vamos contactar-te por WhatsApp em até 48 horas para confirmar a vaga e o pagamento.'
 });
 
 setupForm({
