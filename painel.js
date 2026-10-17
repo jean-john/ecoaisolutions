@@ -5,7 +5,7 @@
 // ============================================================
 
 const PRECO = 600;            // MT por participante
-const META = 20;              // vagas da turma
+const META = 40;              // vagas da turma
 const INICIO = '2026-11-02';  // primeira aula
 const ESTADOS = ['Pendente', 'Pago', 'Link enviado', 'Desistiu'];
 const PAGOS = ['Pago', 'Link enviado'];

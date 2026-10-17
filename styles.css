@@ -545,7 +545,7 @@ code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2
 .insc-hero { background: radial-gradient(60% 80% at 85% 10%, var(--night-2) 0%, transparent 70%), var(--night); color: var(--on-night); }
 .insc-hero-inner { padding-block: 44px 48px; display: flex; flex-direction: column; gap: 18px; }
 .insc-hero h1 { font-size: clamp(30px, 4.4vw, 46px); letter-spacing: -0.02em; }
-.insc-resumo { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(231, 240, 238, 0.18); }
+.insc-resumo { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(231, 240, 238, 0.18); }
 .insc-resumo li { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px 0 0; }
 .insc-resumo span { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--on-night-soft); }
 .insc-resumo b { font-family: var(--f-display); font-weight: 600; font-size: 16px; }
