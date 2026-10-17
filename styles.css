@@ -535,3 +535,30 @@ code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2
   .code { font-size: 12.5px; padding: 16px; }
   .code-out { padding: 12px 16px 16px; font-size: 12.5px; }
 }
+
+/* ---------- página de inscrição ---------- */
+.hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+.partilha { font-size: 15px; color: var(--ink-soft); padding-top: 8px; border-top: 1px solid var(--line); }
+.partilha a { font-weight: 700; overflow-wrap: anywhere; }
+.voltar { font-weight: 700; font-size: 15px; text-decoration: none; }
+.voltar:hover { text-decoration: underline; }
+.insc-hero { background: radial-gradient(60% 80% at 85% 10%, var(--night-2) 0%, transparent 70%), var(--night); color: var(--on-night); }
+.insc-hero-inner { padding-block: 44px 48px; display: flex; flex-direction: column; gap: 18px; }
+.insc-hero h1 { font-size: clamp(30px, 4.4vw, 46px); letter-spacing: -0.02em; }
+.insc-resumo { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(231, 240, 238, 0.18); }
+.insc-resumo li { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px 0 0; }
+.insc-resumo span { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--on-night-soft); }
+.insc-resumo b { font-family: var(--f-display); font-weight: 600; font-size: 16px; }
+.insc-form-wrap { padding-block: 56px 80px; border-top: 0; }
+.insc-narrow { max-width: 720px; display: flex; flex-direction: column; gap: 14px; }
+.insc-nota { color: var(--ink-soft); margin-bottom: 12px; }
+@media (max-width: 720px) {
+  .insc-resumo { grid-template-columns: 1fr 1fr; row-gap: 4px; }
+  .insc-hero-inner { padding-block: 32px 36px; }
+  .insc-form-wrap { padding-block: 36px 64px; }
+  .voltar { font-size: 14px; }
+}
+.brand-text { white-space: nowrap; }
+.voltar { white-space: nowrap; }
+.footer-base a { color: var(--on-night); }
+@media (max-width: 380px) { .pagina-inscricao .brand-text span { display: none; } }

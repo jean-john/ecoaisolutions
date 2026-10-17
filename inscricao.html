@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Inscrição — Curso de C++ online | ECOAI SOLUTIONS</title>
+<meta name="description" content="Ficha de inscrição do curso online Introdução à Programação com C++. Início a 2 de Novembro de 2026, 1 mês, 600 MT.">
+<meta property="og:title" content="ECOAI SOLUTIONS — Curso de Introdução à Programação com C++">
+<meta property="og:description" content="Curso online de 1 mês, início a 2 de Novembro de 2026. Inscrição: 600 MT. Funciona no telemóvel.">
+<meta property="og:image" content="ecoai.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0F1E24">
+<link rel="icon" href="logo-ecoai.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="pagina-inscricao">
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="ECOAI SOLUTIONS, página inicial">
+      <img src="logo-ecoai.svg" alt="" class="brand-mark" width="40" height="40">
+      <span class="brand-text">ECOAI <span>SOLUTIONS</span></span>
+    </a>
+    <a class="voltar" href="index.html#curso">Sobre o curso</a>
+  </div>
+</header>
+
+<main>
+  <section class="insc-hero">
+    <div class="wrap insc-hero-inner">
+      <p class="pill"><span class="pill-dot"></span>Inscrições abertas</p>
+      <h1>Introdução à Programação com C++</h1>
+      <ul class="insc-resumo">
+        <li><span>Início</span><b>2 de Novembro de 2026</b></li>
+        <li><span>Duração</span><b>1 mês, online</b></li>
+        <li><span>Inscrição</span><b>600 MT</b></li>
+        <li><span>Precisas de</span><b>Telemóvel ou computador com internet</b></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section inscricao insc-form-wrap" id="inscricao">
+    <div class="wrap insc-narrow">
+      <h2>Ficha de inscrição</h2>
+      <p class="insc-nota">Leva 2 minutos. Em até 48 horas contactamos-te por WhatsApp para confirmar a vaga e o pagamento por M&#8209;Pesa ou e&#8209;Mola.</p>
+      <form class="form" id="inscricaoForm" novalidate>
+        <input type="hidden" name="_subject" value="Nova inscrição: Curso de C++">
+        <input type="hidden" name="pagina" value="Página de inscrição">
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="curso" value="Introdução à Programação com C++ (1.ª turma)">
+
+        <div class="field">
+          <label for="i-nome">Nome completo</label>
+          <input id="i-nome" name="nome" type="text" autocomplete="name" required>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="i-tel">Telefone / WhatsApp</label>
+            <input id="i-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="84 123 4567" required>
+          </div>
+          <div class="field">
+            <label for="i-email">Email <span class="opt">(opcional)</span></label>
+            <input id="i-email" name="email" type="email" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="i-idade">Idade</label>
+            <input id="i-idade" name="idade" type="number" min="12" max="90" inputmode="numeric" required>
+          </div>
+          <div class="field">
+            <label for="i-local">Onde vives</label>
+            <select id="i-local" name="localidade" required>
+              <option value="">Escolhe…</option>
+              <option>Morrumbene</option>
+              <option>Maxixe</option>
+              <option>Cidade de Inhambane</option>
+              <option>Massinga</option>
+              <option>Homoíne</option>
+              <option>Outro distrito de Inhambane</option>
+              <option>Outra província</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="i-ocup">Ocupação</label>
+            <select id="i-ocup" name="ocupacao" required>
+              <option value="">Escolhe…</option>
+              <option>Estudante do secundário</option>
+              <option>Estudante universitário</option>
+              <option>Professor(a)</option>
+              <option>Trabalhador(a)</option>
+              <option>À procura de emprego</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="i-esc">Escolaridade</label>
+            <select id="i-esc" name="escolaridade" required>
+              <option value="">Escolhe…</option>
+              <option>Até 10.ª classe</option>
+              <option>11.ª ou 12.ª classe</option>
+              <option>Técnico-profissional</option>
+              <option>Ensino superior (a frequentar)</option>
+              <option>Ensino superior (concluído)</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="field choice">
+          <legend>Já programaste antes?</legend>
+          <label><input type="radio" name="experiencia" value="Nunca" required> Nunca</label>
+          <label><input type="radio" name="experiencia" value="Um pouco"> Um pouco</label>
+          <label><input type="radio" name="experiencia" value="Sim"> Sim</label>
+        </fieldset>
+
+        <fieldset class="field choice">
+          <legend>Como vais assistir às aulas?</legend>
+          <label><input type="radio" name="equipamento" value="Computador" required> Computador</label>
+          <label><input type="radio" name="equipamento" value="Só telemóvel"> Só telemóvel</label>
+          <label><input type="radio" name="equipamento" value="Ainda não sei"> Ainda não sei</label>
+        </fieldset>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="i-hor">Horário preferido</label>
+            <select id="i-hor" name="horario" required>
+              <option value="">Escolhe…</option>
+              <option>Dias úteis, fim da tarde (17h–19h)</option>
+              <option>Dias úteis, noite (19h–21h)</option>
+              <option>Sábado de manhã</option>
+              <option>Tanto faz</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="i-orig">Como soubeste do curso?</label>
+            <select id="i-orig" name="origem">
+              <option value="">Escolhe…</option>
+              <option>WhatsApp</option>
+              <option>Facebook</option>
+              <option>Escola ou universidade</option>
+              <option>Rádio</option>
+              <option>Cartaz</option>
+              <option>Amigo ou familiar</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="i-obs">Alguma pergunta ou observação? <span class="opt">(opcional)</span></label>
+          <textarea id="i-obs" name="observacoes" rows="3"></textarea>
+        </div>
+
+        <label class="consent" for="i-cons">
+          <input id="i-cons" name="consentimento" type="checkbox" value="Sim" required>
+          <span>Aceito que a ECOAI SOLUTIONS use estes dados só para gerir a minha inscrição e me contactar sobre o curso.</span>
+        </label>
+
+        <p class="form-error" id="inscricaoErro" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primary btn-block" id="inscricaoBtn">Enviar inscrição</button>
+
+        <div class="form-done" id="inscricaoOk" role="status" hidden>
+          <h3>Inscrição recebida</h3>
+          <p id="inscricaoOkMsg">Obrigado. Vamos contactar-te por WhatsApp em até 48 horas.</p>
+          <a class="btn btn-ghost" id="inscricaoWa" href="#" target="_blank" rel="noopener" hidden>Abrir WhatsApp</a>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" hidden aria-label="Falar connosco por WhatsApp">
+  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Zm0 1.8a7.2 7.2 0 1 1-3.7 13.4l-.3-.2-2.6.7.7-2.5-.2-.3A7.2 7.2 0 0 1 12 4.8Zm-3 3.6c-.2 0-.5 0-.7.3-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.2-.3 0-.4.1-.5l.4-.5.2-.4c.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.5-.6-.5H9Z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<footer class="site-footer">
+  <div class="wrap footer-base">
+    <p>© <span id="year">2026</span> ECOAI SOLUTIONS · Morrumbene, Inhambane, Moçambique · <a href="index.html">Página inicial</a></p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

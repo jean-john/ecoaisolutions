@@ -16,22 +16,26 @@ const CONFIG = {
 
 const $ = (sel, root = document) => root.querySelector(sel);
 
-$('#year').textContent = new Date().getFullYear();
+const yearEl = $('#year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 /* ---------- menu no telemóvel ---------- */
 const navToggle = $('#navToggle');
-navToggle.addEventListener('click', () => {
-  const open = document.body.classList.toggle('nav-open');
-  navToggle.setAttribute('aria-expanded', String(open));
-  navToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-});
-document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () => {
-  document.body.classList.remove('nav-open');
-  navToggle.setAttribute('aria-expanded', 'false');
-  navToggle.setAttribute('aria-label', 'Abrir menu');
-}));
+if (navToggle) {
+  const closeNav = () => {
+    document.body.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Abrir menu');
+  };
+  navToggle.addEventListener('click', () => {
+    const open = document.body.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  });
+  document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', closeNav));
+}
 
-/* ---------- contactos ---------- */
+/* ---------- contactos (só aparecem se estiverem configurados) ---------- */
 const waDigits = CONFIG.whatsapp.replace(/\D/g, '');
 const waUrl = text => `https://wa.me/${waDigits}?text=${encodeURIComponent(text)}`;
 function formatPhone(d) {
@@ -40,32 +44,23 @@ function formatPhone(d) {
     ? `+258 ${d.slice(3, 5)} ${d.slice(5, 8)} ${d.slice(8)}`
     : `+${d}`;
 }
-if (waDigits) {
-  const a = $('#waLink');
-  a.href = waUrl('Olá ECOAI SOLUTIONS, gostaria de mais informações.');
-  a.textContent = formatPhone(waDigits);
-  $('[data-canal="whatsapp"]').hidden = false;
+function showLink(sel, href, text, wrapSel) {
+  const a = $(sel);
+  if (!a) return;
+  a.href = href;
+  if (text) a.textContent = text;
+  a.hidden = false;
+  if (wrapSel && $(wrapSel)) $(wrapSel).hidden = false;
 }
 if (waDigits) {
-  const f = $('#waFloat');
-  f.href = waUrl('Olá ECOAI SOLUTIONS, gostaria de saber mais sobre o curso de C++.');
-  f.hidden = false;
-  const fw = $('#footWa');
-  fw.href = $('#waLink').href;
-  fw.textContent = 'WhatsApp ' + formatPhone(waDigits);
-  fw.hidden = false;
+  const geral = waUrl('Olá ECOAI SOLUTIONS, gostaria de mais informações.');
+  showLink('#waLink', geral, formatPhone(waDigits), '[data-canal="whatsapp"]');
+  showLink('#footWa', geral, 'WhatsApp ' + formatPhone(waDigits));
+  showLink('#waFloat', waUrl('Olá ECOAI SOLUTIONS, gostaria de saber mais sobre o curso de C++.'));
 }
 if (CONFIG.email) {
-  const fe = $('#footEmail');
-  fe.href = `mailto:${CONFIG.email}`;
-  fe.textContent = CONFIG.email;
-  fe.hidden = false;
-}
-if (CONFIG.email) {
-  const a = $('#emailLink');
-  a.href = `mailto:${CONFIG.email}`;
-  a.textContent = CONFIG.email;
-  $('[data-canal="email"]').hidden = false;
+  showLink('#emailLink', `mailto:${CONFIG.email}`, CONFIG.email, '[data-canal="email"]');
+  showLink('#footEmail', `mailto:${CONFIG.email}`, CONFIG.email);
 }
 
 /* ---------- validação ---------- */
@@ -118,6 +113,7 @@ function summary(form, title) {
 
 /* ---------- envio (Formspree, ou WhatsApp como alternativa) ---------- */
 function setupForm({ form, btn, err, done, doneMsg, doneWa, waTitle, okText }) {
+  if (!form) return;
   form.addEventListener('submit', async e => {
     e.preventDefault();
     err.hidden = true;
@@ -134,10 +130,12 @@ function setupForm({ form, btn, err, done, doneMsg, doneWa, waTitle, okText }) {
       btn.disabled = true;
       btn.textContent = 'A enviar…';
       try {
+        const data = new FormData(form);
+        if (data.get('_gotcha')) { finish(); return; } // robô de spam
         const res = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
           method: 'POST',
           headers: { Accept: 'application/json' },
-          body: new FormData(form)
+          body: data
         });
         if (!res.ok) throw new Error(String(res.status));
         doneMsg.textContent = okText;
