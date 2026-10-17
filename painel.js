@@ -198,7 +198,7 @@ el('busca').addEventListener('input', renderTabela);
 
 function msgWhats(r) {
   const nome = (r.nome || '').split(' ')[0];
-  if (r.estado === 'Pendente') return `Olá ${nome}, daqui fala a ECOAI SOLUTIONS. Recebemos a tua inscrição no curso Introdução à Programação com C++, que começa a 2 de Novembro. Para confirmar a vaga, o valor é ${PRECO} MT, por M-Pesa ou e-Mola. Posso enviar-te os dados para o pagamento?`;
+  if (r.estado === 'Pendente') return `Olá ${nome}, daqui fala a ECOAI SOLUTIONS. Recebemos a tua inscrição no curso Introdução à Programação com C++, que começa a 2 de Novembro. Para confirmar a vaga, paga ${PRECO} MT por M-Pesa (84 381 3137), e-Mola (86 249 7846) ou transferência bancária. Todas as contas estão aqui: https://ecoaisolutions-mezt.onrender.com/#pagamento . Depois envia-nos o comprovativo nesta conversa.`;
   if (r.estado === 'Pago') return `Olá ${nome}, confirmamos o teu pagamento de ${PRECO} MT. Obrigado! Antes de 2 de Novembro enviamos-te o link das aulas e o horário.`;
   return `Olá ${nome}, daqui fala a ECOAI SOLUTIONS.`;
 }

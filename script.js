@@ -61,6 +61,9 @@ if (waDigits) {
   showLink('#footWa', geral, 'WhatsApp ' + formatPhone(waDigits));
   showLink('#waFloat', waUrl('Olá ECOAI SOLUTIONS, gostaria de saber mais sobre o curso de C++.'));
 }
+if (waDigits) {
+  showLink('#waComprovativo', waUrl('Olá ECOAI SOLUTIONS, envio o comprovativo de pagamento da inscrição no curso de C++. O meu nome completo é: '));
+}
 if (CONFIG.email) {
   showLink('#emailLink', `mailto:${CONFIG.email}`, CONFIG.email, '[data-canal="email"]');
   showLink('#footEmail', `mailto:${CONFIG.email}`, CONFIG.email);
@@ -201,7 +204,7 @@ setupForm({
   doneMsg: $('#inscricaoOkMsg'),
   doneWa: $('#inscricaoWa'),
   waTitle: 'Inscrição: Introdução à Programação com C++',
-  okText: 'Obrigado. Vamos contactar-te por WhatsApp em até 48 horas para confirmar a vaga e o pagamento.'
+  okText: 'Obrigado. Vamos contactar-te por WhatsApp em até 48 horas. As formas de pagamento estão em "Como pagar a inscrição".'
 });
 
 setupForm({
@@ -213,4 +216,21 @@ setupForm({
   doneWa: $('#contactoWa'),
   waTitle: 'Contacto pelo site ECOAI',
   okText: 'Obrigado. Respondemos em até 48 horas.'
+});
+
+/* ---------- copiar números de conta ---------- */
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-copy]');
+  if (!b) return;
+  const texto = b.dataset.copy;
+  const original = b.textContent;
+  try {
+    await navigator.clipboard.writeText(texto);
+    b.textContent = 'Copiado';
+  } catch (_) {
+    const v = b.previousElementSibling;
+    if (v) { const r = document.createRange(); r.selectNodeContents(v); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+    b.textContent = 'Seleccionado';
+  }
+  setTimeout(() => { b.textContent = original; }, 1800);
 });
