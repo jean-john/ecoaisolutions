@@ -31,28 +31,6 @@ document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () 
   navToggle.setAttribute('aria-label', 'Abrir menu');
 }));
 
-/* ---------- objecto social (Boletim da República n.º 55, III Série) ---------- */
-const ramos = [
-  'Tecnologia e inovação',
-  'Redes e infra-estrutura tecnológica',
-  'Desenvolvimento, comercialização e manutenção de software e aplicações',
-  'Inteligência artificial e ciência de dados',
-  'Segurança de dados e cibersegurança',
-  'Sustentabilidade ambiental e tecnologias verdes',
-  'Educação e capacitação tecnológica',
-  'Consultoria em tecnologia da informação e comunicação',
-  'Pesquisa e desenvolvimento em tecnologias avançadas',
-  'Soluções de energia renovável e eficiência energética',
-  'Automação e internet das coisas',
-  'Gestão e análise de dados',
-  'Tecnologias para agricultura de precisão e agro-indústria',
-  'Realidade virtual, realidade aumentada e tecnologias imersivas',
-  'Organização, promoção e apoio a eventos tecnológicos',
-  'Parcerias e acolhimento de programas e iniciativas tecnológicas'
-];
-const lista = $('#ramosLista');
-ramos.forEach(r => { const li = document.createElement('li'); li.textContent = r; lista.appendChild(li); });
-
 /* ---------- contactos ---------- */
 const waDigits = CONFIG.whatsapp.replace(/\D/g, '');
 const waUrl = text => `https://wa.me/${waDigits}?text=${encodeURIComponent(text)}`;
@@ -67,6 +45,21 @@ if (waDigits) {
   a.href = waUrl('Olá ECOAI SOLUTIONS, gostaria de mais informações.');
   a.textContent = formatPhone(waDigits);
   $('[data-canal="whatsapp"]').hidden = false;
+}
+if (waDigits) {
+  const f = $('#waFloat');
+  f.href = waUrl('Olá ECOAI SOLUTIONS, gostaria de saber mais sobre o curso de C++.');
+  f.hidden = false;
+  const fw = $('#footWa');
+  fw.href = $('#waLink').href;
+  fw.textContent = 'WhatsApp ' + formatPhone(waDigits);
+  fw.hidden = false;
+}
+if (CONFIG.email) {
+  const fe = $('#footEmail');
+  fe.href = `mailto:${CONFIG.email}`;
+  fe.textContent = CONFIG.email;
+  fe.hidden = false;
 }
 if (CONFIG.email) {
   const a = $('#emailLink');

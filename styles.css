@@ -417,14 +417,6 @@ code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2
 .valores li { color: var(--ink-soft); }
 .valores b { color: var(--ink); }
 .sobre-side { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
-.ficha { margin: 0; background: var(--surface); border-radius: var(--radius); padding: 6px 20px; border: 1px solid var(--line); }
-.ficha > div { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
-.ficha > div:last-child { border-bottom: 0; }
-.ficha dt { font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); padding-top: 3px; }
-.ficha dd { margin: 0; font-size: 15.5px; font-variant-numeric: tabular-nums; }
-.ramos summary { cursor: pointer; font-weight: 700; color: var(--blue); }
-.ramos ul { margin: 12px 0 0; padding-left: 20px; columns: 2; column-gap: 24px; font-size: 15px; color: var(--ink-soft); }
-.ramos li { break-inside: avoid; margin-bottom: 4px; }
 .comunidade { display: flex; flex-direction: column; gap: 8px; }
 .comunidade h3 { font-size: 17px; }
 .comunidade p, .comunidade li { color: var(--ink-soft); font-size: 15.5px; }
@@ -440,15 +432,72 @@ code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2
 .canais a:hover { text-decoration: underline; }
 .contacto .form .btn { align-self: flex-start; }
 
+
+/* para onde vamos */
+.futuro { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 10px; }
+.futuro h3 { font-size: 17px; }
+.futuro p { color: var(--ink-soft); font-size: 15.5px; }
+.chips { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li { font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); }
+
+/* perguntas */
+.perguntas-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; align-items: start; }
+.perguntas-grid > div:first-child { display: flex; flex-direction: column; gap: 14px; }
+.perguntas-mais { color: var(--ink-soft); }
+.perguntas-mais a { font-weight: 700; }
+.faq { border-top: 2px solid var(--ink); min-width: 0; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 40px 18px 0;
+  position: relative;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 17px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+  font-family: var(--f-mono); font-size: 22px; font-weight: 400; color: var(--blue);
+  transition: transform .2s var(--ease);
+}
+.faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq details p { padding: 0 40px 18px 0; color: var(--ink-soft); max-width: 62ch; }
+
+/* botão WhatsApp */
+.wa-float {
+  position: fixed;
+  right: calc(20px + env(safe-area-inset-right, 0px));
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  z-index: 60;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #1F8F4E; color: #FFFFFF;
+  font-family: var(--f-display); font-weight: 600; font-size: 15px;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  transition: transform .2s var(--ease);
+}
+.wa-float:hover { transform: translateY(-2px); }
+
 /* rodapé */
-.site-footer { background: var(--night); color: var(--on-night-soft); padding-block: 32px; font-size: 14px; }
-.footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
-.footer-brand { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 600; color: var(--on-night); }
-.footer-brand img { background: #F5F7F6; border-radius: 6px; padding: 2px; }
+.site-footer { background: var(--night); color: var(--on-night-soft); font-size: 15px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; padding-block: 48px 32px; }
+.footer-brand { display: flex; flex-direction: column; gap: 12px; max-width: 34ch; }
+.footer-logo { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 600; font-size: 17px; color: var(--on-night); }
+.footer-logo img { background: #F5F7F6; border-radius: 6px; padding: 2px; }
+.footer-col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.footer-h { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--on-night); margin-bottom: 4px; }
+.footer-col a { color: var(--on-night-soft); text-decoration: none; overflow-wrap: anywhere; }
+.footer-col a:hover { color: var(--on-night); text-decoration: underline; }
+.footer-base { border-top: 1px solid rgba(231, 240, 238, 0.1); padding-block: 18px 24px; font-size: 13.5px; }
 
 /* ---------- responsivo ---------- */
 @media (max-width: 960px) {
-  .hero-inner, .curso-grid, .inscricao-grid, .sobre-grid, .contacto-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-inner, .curso-grid, .inscricao-grid, .sobre-grid, .contacto-grid, .perguntas-grid { grid-template-columns: 1fr; gap: 40px; }
   .inscricao-intro { position: static; }
   .servicos-grid { grid-template-columns: 1fr 1fr; }
   .servico:nth-child(3) { padding-left: 0; border-left: 0; }
@@ -478,8 +527,10 @@ code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2
   .servicos-grid { grid-template-columns: 1fr; }
   .servico, .servico + .servico { padding: 20px 0; border-left: 0; }
   .servico + .servico { border-top: 1px solid var(--line); }
-  .ramos ul { columns: 1; }
-  .ficha > div { grid-template-columns: 1fr; gap: 2px; }
+  .perguntas-grid, .footer-grid { grid-template-columns: 1fr; }
+  .wa-float span { display: none; }
+  .wa-float { padding: 14px; }
+  .footer-base { padding-bottom: 88px; }
   .semanas li { grid-template-columns: 1fr; grid-template-areas: "sem" "tema" "res"; }
   .code { font-size: 12.5px; padding: 16px; }
   .code-out { padding: 12px 16px 16px; font-size: 12.5px; }
