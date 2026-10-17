@@ -6,11 +6,14 @@
    whatsapp:    número com indicativo, só dígitos. Ex.: '258841234567'
    email:       email real da empresa
    formspreeId: código do formulário em formspree.io (ex.: 'xyzabcd').
-                Enquanto estiver vazio, as inscrições seguem por WhatsApp. */
+                Enquanto estiver vazio, as inscrições seguem por WhatsApp.
+   sheetUrl:    URL da aplicação web do Google Apps Script (termina em /exec).
+                Cada inscrição é gravada na folha "ECOAI — Inscrições Curso C++". */
 const CONFIG = {
   whatsapp: '258843813137',
   email: 'ecoaisolutionssusa@gmail.com',
-  formspreeId: 'mgaorvrw'
+  formspreeId: 'mgaorvrw',
+  sheetUrl: ''
 };
 // ---------------------------------------------------
 
@@ -125,6 +128,17 @@ function setupForm({ form, btn, err, done, doneMsg, doneWa, waTitle, okText }) {
       return;
     }
     const text = summary(form, waTitle);
+
+    // grava na base de dados (Google Sheets); a resposta não é legível, por isso não bloqueia
+    if (CONFIG.sheetUrl && form.id === 'inscricaoForm') {
+      try {
+        fetch(CONFIG.sheetUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new URLSearchParams(new FormData(form))
+        }).catch(() => {});
+      } catch (_) {}
+    }
 
     if (CONFIG.formspreeId) {
       btn.disabled = true;

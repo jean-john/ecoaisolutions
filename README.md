@@ -86,3 +86,10 @@ const CONFIG = {
 - Sem `formspreeId`, mas com `whatsapp`, a ficha abre o WhatsApp com os dados
   já escritos e a pessoa só carrega em Enviar.
 - O WhatsApp e o email só aparecem na secção Contacto depois de preenchidos.
+
+## Base de dados de inscrições e painel
+
+- Folha Google Sheets: "ECOAI — Inscrições Curso C++" (no Google Drive).
+- Código da base de dados: `apps-script/Codigo.gs` (instruções no topo do ficheiro).
+- Depois de implementar o Apps Script, colocar o URL `/exec` em `CONFIG.sheetUrl` no `script.js`.
+- Painel privado: `/painel.html` (pede a palavra-passe definida em `CHAVE` no Apps Script).

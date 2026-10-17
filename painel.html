@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel de Inscrições | ECOAI SOLUTIONS</title>
+<meta name="theme-color" content="#0F1E24">
+<link rel="icon" href="logo-ecoai.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="painel">
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="ECOAI SOLUTIONS, página inicial">
+      <img src="logo-ecoai.svg" alt="" class="brand-mark" width="40" height="40">
+      <span class="brand-text">ECOAI <span>Painel</span></span>
+    </a>
+    <div class="painel-acoes" id="acoesTopo" hidden>
+      <button class="btn btn-ghost btn-sm" id="btnAtualizar" type="button">Actualizar</button>
+      <button class="btn btn-ghost btn-sm" id="btnSair" type="button">Sair</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap painel-main">
+
+  <!-- ENTRAR -->
+  <section class="entrar" id="vistaEntrar">
+    <h1>Inscrições do curso de C++</h1>
+    <p class="lede">Escreve a palavra-passe do painel para ver as inscrições.</p>
+    <form class="form entrar-form" id="formEntrar" novalidate>
+      <div class="field">
+        <label for="p-chave">Palavra-passe</label>
+        <input id="p-chave" type="password" autocomplete="current-password" required>
+      </div>
+      <p class="form-error" id="entrarErro" role="alert" hidden></p>
+      <button class="btn btn-primary" type="submit" id="btnEntrar">Entrar</button>
+    </form>
+    <p class="entrar-demo" id="semBase" hidden>
+      A base de dados ainda não está ligada ao site.
+      <button class="link-btn" type="button" id="btnDemo">Ver o painel com dados de exemplo</button>
+    </p>
+  </section>
+
+  <!-- PAINEL -->
+  <section id="vistaPainel" hidden>
+    <div class="aviso-demo" id="avisoDemo" hidden>Dados de exemplo. Não são inscrições reais.</div>
+
+    <div class="painel-head">
+      <div>
+        <p class="eyebrow">Introdução à Programação com C++ · 1.ª turma</p>
+        <h1>Inscrições</h1>
+      </div>
+      <p class="atualizado" id="atualizado"></p>
+    </div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <article class="bloco relatorio">
+      <h2>Resumo</h2>
+      <div id="relatorio"></div>
+    </article>
+
+    <article class="bloco">
+      <div class="bloco-head">
+        <h2>Inscrições por dia</h2>
+        <p class="bloco-sub" id="diasSub"></p>
+      </div>
+      <div class="dias" id="dias"></div>
+    </article>
+
+    <div class="graficos" id="graficos"></div>
+
+    <article class="bloco">
+      <div class="bloco-head lista-head">
+        <h2>Lista de inscritos</h2>
+        <button class="btn btn-ghost btn-sm" id="btnCsv" type="button">Exportar para Excel (CSV)</button>
+      </div>
+      <div class="filtros">
+        <input type="search" id="busca" placeholder="Procurar por nome, telefone ou localidade" aria-label="Procurar">
+        <div class="chips-filtro" id="filtroEstado" role="group" aria-label="Filtrar por estado"></div>
+      </div>
+      <div class="tabela-wrap">
+        <table class="tabela">
+          <thead>
+            <tr>
+              <th>Data</th><th>Nome</th><th>Telefone</th><th>Localidade</th>
+              <th>Ocupação</th><th>Assiste com</th><th>Horário</th><th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="linhas"></tbody>
+        </table>
+      </div>
+      <p class="vazio" id="vazio" hidden>Nenhuma inscrição corresponde à procura.</p>
+    </article>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="script.js"></script>
+<script src="painel.js"></script>
+</body>
+</html>
