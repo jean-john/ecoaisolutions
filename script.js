@@ -13,7 +13,7 @@ const CONFIG = {
   whatsapp: '258843813137',
   email: 'ecoaisolutionssusa@gmail.com',
   formspreeId: 'mgaorvrw',
-  sheetUrl: 'https://script.google.com/macros/s/AKfycbyAWqM8BFXNj2Qm5BgTExqRiOtDswZxWHAQ3nNr-gQITyhhHy9_5Iao9PGobrSaOrnl/exec'
+  sheetUrl: 'https://script.google.com/macros/s/AKfycby1hE65SPbY3LBoZpAHkHtHcg_qOTZfkk052_mgkjGbqe0i15F0QUFLgk8bmN_OTQSz/exec'
 };
 // ---------------------------------------------------
 
