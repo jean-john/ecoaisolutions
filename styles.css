@@ -658,3 +658,51 @@ code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2
 .comprovativo b { color: var(--ink); }
 .insc-pag { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
 .insc-pag h2 { font-size: 26px; }
+
+/* ---------- pagamento passo a passo ---------- */
+.pag { display: flex; flex-direction: column; gap: 18px; max-width: 920px; }
+.pag-valor { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px; background: var(--night); color: var(--on-night); border-radius: 14px; padding: 22px 26px; }
+.pag-valor-k { display: block; font-family: var(--f-mono); font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--on-night-soft); }
+.pag-valor b { font-family: var(--f-display); font-size: 40px; font-weight: 700; line-height: 1.1; }
+.pag-valor p { color: var(--on-night-soft); max-width: 40ch; font-size: 16px; }
+.pag-passo { display: flex; align-items: center; gap: 12px; font-size: 19px; margin-top: 14px; }
+.pag-passo span { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--green); color: var(--green-ink); font-family: var(--f-mono); font-size: 14px; }
+.pag-ops { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.pag-op {
+  font: inherit; color: var(--ink); text-align: left; cursor: pointer;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  padding: 16px 14px 14px; min-height: 96px;
+  background: var(--surface); border: 2px solid var(--line); border-radius: 12px;
+  position: relative; transition: border-color .15s, background .15s, transform .15s;
+}
+.pag-op:hover { border-color: color-mix(in srgb, var(--c) 55%, var(--line)); transform: translateY(-1px); }
+.pag-op b { font-family: var(--f-display); font-size: 17px; font-weight: 600; }
+.pag-op small { font-size: 13px; color: var(--ink-soft); }
+.pag-cor { width: 26px; height: 6px; border-radius: 3px; background: var(--c); margin-bottom: 8px; }
+.pag-op[aria-selected="true"] { border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, var(--surface)); }
+.pag-op[aria-selected="true"]::after { content: "✓"; position: absolute; top: 10px; right: 12px; width: 22px; height: 22px; border-radius: 50%; background: var(--c); color: #fff; font-size: 13px; display: grid; place-items: center; font-weight: 700; }
+.pag-det { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.pag-dados { background: var(--surface); border: 2px solid var(--c); border-radius: 14px; padding: 18px 20px 12px; display: flex; flex-direction: column; min-width: 0; }
+.pag-dados-head { display: flex; align-items: center; gap: 10px; padding-bottom: 10px; }
+.pag-dados-head .pag-cor { margin: 0; }
+.pag-dados-head b { font-family: var(--f-display); font-size: 20px; font-weight: 600; }
+.pag-linha { display: grid; grid-template-columns: 60px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 11px 0; border-top: 1px solid var(--line); }
+.pag-k { font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; color: var(--ink-soft); }
+.pag-v { font-family: var(--f-mono); font-size: 18px; font-weight: 500; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; user-select: all; }
+.pag-tit { font-family: var(--f-body); font-size: 16px; font-weight: 700; user-select: text; }
+.pag-como { margin: 0; padding: 18px 20px 18px 40px; background: var(--surface-2); border-radius: 14px; display: flex; flex-direction: column; gap: 10px; font-size: 16px; color: var(--ink-soft); min-width: 0; }
+.pag-como b { color: var(--ink); }
+.pag .comprovativo { margin-top: 0; background: color-mix(in srgb, var(--green) 9%, var(--surface)); border: 1.5px solid color-mix(in srgb, var(--green) 45%, transparent); border-radius: 14px; padding: 18px 20px; }
+@media (max-width: 860px) {
+  .pag-ops { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pag-det { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .pag-ops { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+  .pag-op { grid-column: span 2; padding: 12px 10px 10px; min-height: 84px; }
+  .pag-op:nth-child(-n+2) { grid-column: span 3; }
+  .pag-op b { font-size: 15px; }
+  .pag-op[aria-selected="true"]::after { top: 8px; right: 8px; width: 18px; height: 18px; font-size: 11px; }
+  .pag-valor b { font-size: 34px; }
+  .pag-v { font-size: 16px; }
+}

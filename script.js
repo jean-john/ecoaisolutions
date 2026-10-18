@@ -61,9 +61,35 @@ if (waDigits) {
   showLink('#footWa', geral, 'WhatsApp ' + formatPhone(waDigits));
   showLink('#waFloat', waUrl('Olá ECOAI SOLUTIONS, gostaria de saber mais sobre o curso de C++.'));
 }
-if (waDigits) {
-  showLink('#waComprovativo', waUrl('Olá ECOAI SOLUTIONS, envio o comprovativo de pagamento da inscrição no curso de C++. O meu nome completo é: '));
-}
+const msgComprovativo = metodo => waUrl(`Olá ECOAI SOLUTIONS, envio o comprovativo de pagamento (${metodo}) da inscrição no curso de C++. O meu nome completo é: `);
+if (waDigits) showLink('#waComprovativo', msgComprovativo('M-Pesa'));
+
+/* ---------- escolher a forma de pagamento ---------- */
+document.querySelectorAll('[data-pag]').forEach(pag => {
+  const tabs = [...pag.querySelectorAll('.pag-op')];
+  const escolher = (tab, focar) => {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      const det = pag.querySelector('#' + t.getAttribute('aria-controls'));
+      if (det) det.hidden = !on;
+    });
+    if (focar) tab.focus();
+    const wa = pag.querySelector('#waComprovativo');
+    if (wa && waDigits) wa.href = msgComprovativo(tab.dataset.nome.replace(/\u2011/g, '-'));
+  };
+  tabs.forEach((t, i) => {
+    t.tabIndex = i === 0 ? 0 : -1;
+    t.addEventListener('click', () => escolher(t));
+    t.addEventListener('keydown', e => {
+      const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      if (!d) return;
+      e.preventDefault();
+      escolher(tabs[(i + d + tabs.length) % tabs.length], true);
+    });
+  });
+});
 if (CONFIG.email) {
   showLink('#emailLink', `mailto:${CONFIG.email}`, CONFIG.email, '[data-canal="email"]');
   showLink('#footEmail', `mailto:${CONFIG.email}`, CONFIG.email);

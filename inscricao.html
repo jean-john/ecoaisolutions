@@ -177,40 +177,82 @@
       <div class="pagamento insc-pag" id="pagamento">
         <h2>Como pagar a inscrição</h2>
         <p class="insc-nota">600 MT, por M&#8209;Pesa, e&#8209;Mola, depósito ou transferência bancária.</p>
-        <div class="contas">
-          <article class="conta">
-            <div class="conta-head"><h3>M&#8209;Pesa</h3><span>Vodacom</span></div>
-            <div class="conta-linha"><span class="conta-k">Número</span><span class="conta-v">84 381 3137</span><button type="button" class="copiar" data-copy="843813137" aria-label="Copiar Número M-Pesa">Copiar</button></div>
-            <p class="conta-tit">Titular: Jean Marie John</p>
-          </article>
-          <article class="conta">
-            <div class="conta-head"><h3>e&#8209;Mola</h3><span>Movitel</span></div>
-            <div class="conta-linha"><span class="conta-k">Número</span><span class="conta-v">86 249 7846</span><button type="button" class="copiar" data-copy="862497846" aria-label="Copiar Número e-Mola">Copiar</button></div>
-            <p class="conta-tit">Titular: Jean Marie John</p>
-          </article>
-          <article class="conta">
-            <div class="conta-head"><h3>BCI</h3><span>Banco</span></div>
-            <div class="conta-linha"><span class="conta-k">Conta</span><span class="conta-v">31686757310001</span><button type="button" class="copiar" data-copy="31686757310001" aria-label="Copiar Conta BCI">Copiar</button></div>
-            <div class="conta-linha"><span class="conta-k">NIB</span><span class="conta-v">0008 0000 16867573101 28</span><button type="button" class="copiar" data-copy="000800001686757310128" aria-label="Copiar NIB BCI">Copiar</button></div>
-            <p class="conta-tit">Titular: ECOAI SOLUTIONS</p>
-          </article>
-          <article class="conta">
-            <div class="conta-head"><h3>FNB</h3><span>Banco</span></div>
-            <div class="conta-linha"><span class="conta-k">Conta</span><span class="conta-v">4592529510001</span><button type="button" class="copiar" data-copy="4592529510001" aria-label="Copiar Conta FNB">Copiar</button></div>
-            <div class="conta-linha"><span class="conta-k">NIB</span><span class="conta-v">0014 0000 45925295101 92</span><button type="button" class="copiar" data-copy="001400004592529510192" aria-label="Copiar NIB FNB">Copiar</button></div>
-            <p class="conta-tit">Titular: ECOAI SOLUTIONS, SU, SA</p>
-          </article>
-          <article class="conta">
-            <div class="conta-head"><h3>Millennium bim</h3><span>Banco</span></div>
-            <div class="conta-linha"><span class="conta-k">Conta</span><span class="conta-v">622623213</span><button type="button" class="copiar" data-copy="622623213" aria-label="Copiar Conta Millennium bim">Copiar</button></div>
-            <div class="conta-linha"><span class="conta-k">NIB</span><span class="conta-v">0001 0000 00622623213 57</span><button type="button" class="copiar" data-copy="000100000062262321357" aria-label="Copiar NIB Millennium bim">Copiar</button></div>
-            <p class="conta-tit">Titular: Jean John</p>
-          </article>
+        <div class="pag" data-pag>
+        <div class="pag-valor">
+          <div><span class="pag-valor-k">Valor da inscrição</span><b>600 MT</b></div>
+          <p>Pagamento único. A vaga fica tua quando recebermos o comprovativo.</p>
         </div>
+
+        <h3 class="pag-passo"><span>1</span>Escolhe como queres pagar</h3>
+        <div class="pag-ops" role="tablist" aria-label="Formas de pagamento">
+          <button type="button" class="pag-op" role="tab" id="tab-mpesa" aria-controls="det-mpesa" aria-selected="true" data-op="mpesa" data-nome="M&#8209;Pesa" style="--c: #E60000">
+            <span class="pag-cor" aria-hidden="true"></span><b>M&#8209;Pesa</b><small>Vodacom</small>
+          </button>
+          <button type="button" class="pag-op" role="tab" id="tab-emola" aria-controls="det-emola" aria-selected="false" data-op="emola" data-nome="e&#8209;Mola" style="--c: #F58220">
+            <span class="pag-cor" aria-hidden="true"></span><b>e&#8209;Mola</b><small>Movitel</small>
+          </button>
+          <button type="button" class="pag-op" role="tab" id="tab-bci" aria-controls="det-bci" aria-selected="false" data-op="bci" data-nome="BCI" style="--c: #1F4E9A">
+            <span class="pag-cor" aria-hidden="true"></span><b>BCI</b><small>Banco</small>
+          </button>
+          <button type="button" class="pag-op" role="tab" id="tab-fnb" aria-controls="det-fnb" aria-selected="false" data-op="fnb" data-nome="FNB" style="--c: #009CA6">
+            <span class="pag-cor" aria-hidden="true"></span><b>FNB</b><small>Banco</small>
+          </button>
+          <button type="button" class="pag-op" role="tab" id="tab-bim" aria-controls="det-bim" aria-selected="false" data-op="bim" data-nome="Millennium bim" style="--c: #C8005A">
+            <span class="pag-cor" aria-hidden="true"></span><b>Millennium bim</b><small>Banco</small>
+          </button>
+        </div>
+
+        <h3 class="pag-passo"><span>2</span>Paga com estes dados</h3>
+          <div class="pag-det" role="tabpanel" id="det-mpesa" aria-labelledby="tab-mpesa" style="--c: #E60000">
+            <div class="pag-dados">
+              <div class="pag-dados-head"><span class="pag-cor" aria-hidden="true"></span><b>M&#8209;Pesa</b></div>
+              <div class="pag-linha"><span class="pag-k">Número</span><span class="pag-v">84 381 3137</span><button type="button" class="copiar" data-copy="843813137" aria-label="Copiar Número M-Pesa">Copiar</button></div>
+              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">Jean Marie John</span></div>
+            </div>
+            <ol class="pag-como"><li>No teu telemóvel Vodacom, marca <b>*150#</b> e entra no M&#8209;Pesa.</li><li>Escolhe a opção de <b>transferir dinheiro</b> para outro número.</li><li>Número <b>843813137</b>, valor <b>600 MT</b>.</li><li>Confirma com o teu PIN e guarda a SMS de confirmação.</li></ol>
+          </div>
+          <div class="pag-det" role="tabpanel" id="det-emola" aria-labelledby="tab-emola" style="--c: #F58220" hidden>
+            <div class="pag-dados">
+              <div class="pag-dados-head"><span class="pag-cor" aria-hidden="true"></span><b>e&#8209;Mola</b></div>
+              <div class="pag-linha"><span class="pag-k">Número</span><span class="pag-v">86 249 7846</span><button type="button" class="copiar" data-copy="862497846" aria-label="Copiar Número e-Mola">Copiar</button></div>
+              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">Jean Marie John</span></div>
+            </div>
+            <ol class="pag-como"><li>No teu telemóvel Movitel, marca <b>*898#</b> e entra no e&#8209;Mola.</li><li>Escolhe a opção de <b>transferir dinheiro</b> para outro número.</li><li>Número <b>862497846</b>, valor <b>600 MT</b>.</li><li>Confirma com o teu PIN e guarda a SMS de confirmação.</li></ol>
+          </div>
+          <div class="pag-det" role="tabpanel" id="det-bci" aria-labelledby="tab-bci" style="--c: #1F4E9A" hidden>
+            <div class="pag-dados">
+              <div class="pag-dados-head"><span class="pag-cor" aria-hidden="true"></span><b>BCI</b></div>
+              <div class="pag-linha"><span class="pag-k">Conta</span><span class="pag-v">31686757310001</span><button type="button" class="copiar" data-copy="31686757310001" aria-label="Copiar Conta BCI">Copiar</button></div>
+              <div class="pag-linha"><span class="pag-k">NIB</span><span class="pag-v">0008 0000 16867573101 28</span><button type="button" class="copiar" data-copy="000800001686757310128" aria-label="Copiar NIB BCI">Copiar</button></div>
+              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">ECOAI SOLUTIONS</span></div>
+            </div>
+            <ol class="pag-como"><li>Na app do banco, no balcão ou no ATM, escolhe <b>transferência</b> ou <b>depósito</b>.</li><li>Se a tua conta é do mesmo banco, usa o número de conta. Se é de outro banco, usa o <b>NIB</b>.</li><li>Valor <b>600 MT</b>. Na descrição escreve o <b>teu nome</b>.</li><li>Guarda o comprovativo (foto ou PDF).</li></ol>
+          </div>
+          <div class="pag-det" role="tabpanel" id="det-fnb" aria-labelledby="tab-fnb" style="--c: #009CA6" hidden>
+            <div class="pag-dados">
+              <div class="pag-dados-head"><span class="pag-cor" aria-hidden="true"></span><b>FNB</b></div>
+              <div class="pag-linha"><span class="pag-k">Conta</span><span class="pag-v">4592529510001</span><button type="button" class="copiar" data-copy="4592529510001" aria-label="Copiar Conta FNB">Copiar</button></div>
+              <div class="pag-linha"><span class="pag-k">NIB</span><span class="pag-v">0014 0000 45925295101 92</span><button type="button" class="copiar" data-copy="001400004592529510192" aria-label="Copiar NIB FNB">Copiar</button></div>
+              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">ECOAI SOLUTIONS, SU, SA</span></div>
+            </div>
+            <ol class="pag-como"><li>Na app do banco, no balcão ou no ATM, escolhe <b>transferência</b> ou <b>depósito</b>.</li><li>Se a tua conta é do mesmo banco, usa o número de conta. Se é de outro banco, usa o <b>NIB</b>.</li><li>Valor <b>600 MT</b>. Na descrição escreve o <b>teu nome</b>.</li><li>Guarda o comprovativo (foto ou PDF).</li></ol>
+          </div>
+          <div class="pag-det" role="tabpanel" id="det-bim" aria-labelledby="tab-bim" style="--c: #C8005A" hidden>
+            <div class="pag-dados">
+              <div class="pag-dados-head"><span class="pag-cor" aria-hidden="true"></span><b>Millennium bim</b></div>
+              <div class="pag-linha"><span class="pag-k">Conta</span><span class="pag-v">622623213</span><button type="button" class="copiar" data-copy="622623213" aria-label="Copiar Conta Millennium bim">Copiar</button></div>
+              <div class="pag-linha"><span class="pag-k">NIB</span><span class="pag-v">0001 0000 00622623213 57</span><button type="button" class="copiar" data-copy="000100000062262321357" aria-label="Copiar NIB Millennium bim">Copiar</button></div>
+              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">Jean John</span></div>
+            </div>
+            <ol class="pag-como"><li>Na app do banco, no balcão ou no ATM, escolhe <b>transferência</b> ou <b>depósito</b>.</li><li>Se a tua conta é do mesmo banco, usa o número de conta. Se é de outro banco, usa o <b>NIB</b>.</li><li>Valor <b>600 MT</b>. Na descrição escreve o <b>teu nome</b>.</li><li>Guarda o comprovativo (foto ou PDF).</li></ol>
+          </div>
+
+        <h3 class="pag-passo"><span>3</span>Envia o comprovativo</h3>
         <div class="comprovativo">
-          <p><b>Depois de pagar</b>, envia o comprovativo por WhatsApp para 84 381 3137, com o teu nome completo. A vaga fica confirmada quando o pagamento chega.</p>
+          <p>Envia a foto ou o PDF do comprovativo por WhatsApp para <b>84 381 3137</b>, com o teu nome completo. Depois confirmamos a tua vaga por WhatsApp.</p>
           <a class="btn btn-primary" id="waComprovativo" href="#" target="_blank" rel="noopener" hidden>Enviar comprovativo por WhatsApp</a>
         </div>
+      </div>
       </div>
     </div>
   </section>
