@@ -706,3 +706,7 @@ code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2
   .pag-valor b { font-size: 34px; }
   .pag-v { font-size: 16px; }
 }
+.pag-logo { width: 44px; height: 44px; border-radius: 22%; object-fit: cover; margin-bottom: 6px; display: block; }
+.pag-logo.redondo { border-radius: 50%; }
+.pag-dados-head .pag-logo { width: 36px; height: 36px; margin: 0; }
+@media (max-width: 520px) { .pag-op .pag-logo { width: 36px; height: 36px; } }
