@@ -8,7 +8,7 @@
   const waLink = t => `https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
   const naPaginaInscricao = /inscricao\.html$/.test(location.pathname);
   const LINK_INSC = naPaginaInscricao ? '#inscricao' : 'inscricao.html';
-  const LINK_PAG = '#pagamento';
+  const LINK_PAG = naPaginaInscricao ? '#pagamento' : 'inscricao.html#pagamento';
 
   // Cada resposta: palavras-chave (sem acentos) e o texto.
   // Botões: [texto, endereço]. Endereços "wa:" abrem o WhatsApp com essa mensagem.

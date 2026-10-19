@@ -3,20 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ECOAI SOLUTIONS — Formação e Tecnologia em Inhambane</title>
-<meta name="description" content="ECOAI SOLUTIONS, empresa moçambicana de tecnologia sediada em Morrumbene, Inhambane. Curso de Introdução à Programação com C++, sites, suporte informático e consultoria.">
-<meta property="og:title" content="ECOAI SOLUTIONS — Curso de Introdução à Programação com C++">
-<meta property="og:description" content="Curso online de 1 mês, início a 2 de Novembro de 2026. Inscrição: 600 MT. Funciona no telemóvel.">
+<title>ECOAI SOLUTIONS — Engenharia de Software e Soluções Digitais</title>
+<meta name="description" content="ECOAI SOLUTIONS é uma empresa moçambicana de tecnologia em Morrumbene, Inhambane: desenvolvimento de software, sites, redes e suporte informático, dados e formação em programação.">
+<meta property="og:title" content="ECOAI SOLUTIONS — Engenharia de Software e Soluções Digitais">
+<meta property="og:description" content="Software, sites, redes, dados e formação em programação, a partir de Inhambane para todo Moçambique.">
 <meta property="og:image" content="ecoai.png">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0F1E24">
+<meta name="theme-color" content="#0B1D26">
 <link rel="icon" href="logo-ecoai.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home">
+
+<a class="aviso-curso" href="inscricao.html">
+  <span class="aviso-tag">Novo</span>
+  <span class="aviso-txt">Curso online de C++ · começa a 2 de Novembro</span>
+  <span class="aviso-cta">Inscrever-me →</span>
+</a>
 
 <header class="site-header">
   <div class="wrap header-inner">
@@ -25,11 +31,11 @@
       <span class="brand-text">ECOAI <span>SOLUTIONS</span></span>
     </a>
     <nav class="nav" id="nav" aria-label="Navegação principal">
-      <a href="#curso">Curso C++</a>
       <a href="#servicos">Serviços</a>
+      <a href="#processo">Como trabalhamos</a>
+      <a href="#formacao">Formação</a>
       <a href="#sobre">Sobre</a>
-      <a href="#contacto">Contacto</a>
-      <a href="#inscricao" class="btn btn-primary btn-sm">Inscrever-me</a>
+      <a href="#contacto" class="btn btn-primary btn-sm">Pedir orçamento</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
@@ -40,394 +46,148 @@
 <main id="topo">
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <p class="pill"><span class="pill-dot"></span>Inscrições abertas · início a 2 de Novembro</p>
-        <h1>Tecnologia feita em Inhambane, para quem vive aqui.</h1>
-        <p class="hero-sub">
-          A ECOAI SOLUTIONS ensina programação, cria sites e dá suporte informático
-          a escolas, negócios e instituições a partir de Morrumbene.
-          Começamos pelo que mais falta faz: formar pessoas.
-        </p>
+  <section class="h2-hero">
+    <div class="wrap h2-hero-inner">
+      <div class="h2-copy">
+        <p class="h2-kicker"><span></span>Empresa de tecnologia · Inhambane, Moçambique</p>
+        <h1>Engenharia de software e soluções digitais, feitas em Moçambique.</h1>
+        <p class="h2-sub">Desenvolvemos sistemas, sites e redes para escolas, negócios e instituições, e formamos as pessoas que os vão usar e manter.</p>
         <div class="hero-cta">
-          <a href="#inscricao" class="btn btn-primary">Inscrever-me no curso de C++</a>
+          <a href="#contacto" class="btn btn-primary">Pedir orçamento</a>
           <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
         </div>
+        <ul class="h2-pontos">
+          <li>Atendimento em português, perto de ti</li>
+          <li>Soluções pensadas para a rede e os recursos locais</li>
+          <li>Suporte depois da entrega</li>
+        </ul>
       </div>
 
-      <figure class="code-card" aria-label="Exemplo do primeiro programa do curso">
-        <div class="code-bar">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="code-file">aula1.cpp</span>
-        </div>
-<pre class="code"><code><span class="c-pre">#include</span> <span class="c-str">&lt;iostream&gt;</span>
-<span class="c-kw">using namespace</span> std;
+      <figure class="term" aria-label="Resumo dos serviços da ECOAI SOLUTIONS">
+        <div class="term-bar"><span></span><span></span><span></span><b>ecoai — terminal</b></div>
+<pre class="term-body"><span class="t-p">~/ecoai $</span> ecoai servicos --listar
+<span class="t-ok">✓</span> desenvolvimento de software à medida
+<span class="t-ok">✓</span> sites e sistemas web
+<span class="t-ok">✓</span> redes e suporte informático
+<span class="t-ok">✓</span> dados e inteligência artificial
+<span class="t-ok">✓</span> formação em programação
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>() {
-    string nome;
-    cout &lt;&lt; <span class="c-str">"Como te chamas? "</span>;
-    cin &gt;&gt; nome;
-    cout &lt;&lt; <span class="c-str">"Olá, "</span> &lt;&lt; nome
-         &lt;&lt; <span class="c-str">"! Bem-vindo à ECOAI."</span>;
-    <span class="c-kw">return</span> <span class="c-num">0</span>;
-}</code></pre>
-        <figcaption class="code-out">
-          <span class="out-label">Saída</span>
-          <span class="out-line">Como te chamas? <b>Amina</b></span>
-          <span class="out-line">Olá, Amina! Bem-vindo à ECOAI.<i class="caret" aria-hidden="true"></i></span>
-        </figcaption>
+<span class="t-p">~/ecoai $</span> ecoai estado
+<span class="t-k">sede</span>      Morrumbene, Inhambane
+<span class="t-k">alcance</span>   todo o país (online)
+<span class="t-k">pedidos</span>   <span class="t-ok">abertos</span><i class="t-caret" aria-hidden="true"></i></pre>
       </figure>
     </div>
   </section>
 
-  <!-- CURSO -->
-  <section class="section curso" id="curso">
+  <!-- SERVIÇOS -->
+  <section class="section s2" id="servicos">
     <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Curso online · 1.ª turma</p>
-        <h2>Introdução à Programação com C++</h2>
-        <p class="lede">
-          Um mês para escrever os teus primeiros programas, do zero.
-          As aulas são online e ao vivo, por isso podes participar de qualquer
-          parte de Moçambique. Não é preciso saber programar nem ter computador:
-          os exercícios correm num compilador online que funciona no telemóvel.
-        </p>
-      </div>
-
-      <div class="curso-grid">
-        <dl class="facts">
-          <div><dt>Início</dt><dd>2 de Novembro de 2026 <small>segunda-feira</small></dd></div>
-          <div><dt>Duração</dt><dd>1 mês · 4 semanas</dd></div>
-          <div><dt>Formato</dt><dd>Online, aulas ao vivo <small>o link chega por WhatsApp</small></dd></div>
-          <div><dt>Precisas de</dt><dd>Telemóvel ou computador com internet</dd></div>
-          <div><dt>Inscrição</dt><dd>600 MT <small>M&#8209;Pesa, e&#8209;Mola ou banco · <a href="#pagamento">ver contas</a></small></dd></div>
-          <div><dt>Vagas</dt><dd>40 participantes <small>por ordem de pagamento</small></dd></div>
-          <div><dt>Horário</dt><dd>Combinado com a turma <small>indica a tua preferência na ficha</small></dd></div>
-          <div><dt>No fim</dt><dd>Certificado ECOAI SOLUTIONS <small>e entrada em comunidades de programação dos nossos parceiros</small></dd></div>
-        </dl>
-
-        <div class="programa">
-          <h3>Programa</h3>
-          <ol class="semanas">
-            <li><span class="sem">Semana 1</span><span class="tema">Primeiro programa: <code>cout</code>, <code>cin</code>, variáveis e operadores</span><span class="res">Um programa que cumprimenta e uma calculadora simples</span></li>
-            <li><span class="sem">Semana 2</span><span class="tema">Decisões: <code>if</code>, <code>else</code>, <code>switch</code></span><span class="res">Aprovado ou reprovado, a partir das notas</span></li>
-            <li><span class="sem">Semana 3</span><span class="tema">Repetições e funções: <code>for</code>, <code>while</code></span><span class="res">Tabuada e jogo de adivinhar o número</span></li>
-            <li><span class="sem">Semana 4</span><span class="tema">Vectores e projecto final</span><span class="res">Mini-sistema de stock para uma loja local</span></li>
-          </ol>
+      <div class="s2-head">
+        <div>
+          <p class="eyebrow">Serviços</p>
+          <h2>Do primeiro site ao sistema da tua instituição</h2>
         </div>
+        <p class="lede">Escolhe o que precisas. Fazemos uma proposta clara, com prazo e preço, antes de começar.</p>
       </div>
 
-      <div class="para-quem">
-        <h3>Para quem é</h3>
-        <ul>
-          <li>Estudantes do ensino secundário e universitário</li>
-          <li>Professores que querem ensinar tecnologia</li>
-          <li>Jovens à procura de uma nova competência para o emprego</li>
-          <li>Qualquer pessoa curiosa, a partir dos 14 anos</li>
+      <div class="s2-grid">
+        <article class="s2-card">
+          <svg class="s2-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7 3 12l5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>
+          <h3>Software à medida</h3>
+          <p>Sistemas de gestão de stock, notas, registos e facturação, desenhados para o teu processo.</p>
+          <span class="s2-para">Lojas · escolas · ONGs</span>
+        </article>
+        <article class="s2-card">
+          <svg class="s2-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8M12 18v3"/></svg>
+          <h3>Sites e presença digital</h3>
+          <p>Sites rápidos que funcionam bem no telemóvel, perfil no Google Maps e páginas nas redes sociais.</p>
+          <span class="s2-para">Lodges · restaurantes · lojas</span>
+        </article>
+        <article class="s2-card">
+          <svg class="s2-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2h12v2"/></svg>
+          <h3>Redes e suporte informático</h3>
+          <p>Instalação de redes e internet, manutenção de computadores e apoio técnico com contrato mensal.</p>
+          <span class="s2-para">Escritórios · administrações · escolas</span>
+        </article>
+        <article class="s2-card">
+          <svg class="s2-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+          <h3>Dados e inteligência artificial</h3>
+          <p>Organização e análise de dados, relatórios e automatização de tarefas repetitivas com IA.</p>
+          <span class="s2-para">Projectos · instituições · investigação</span>
+        </article>
+        <article class="s2-card">
+          <svg class="s2-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <h3>Segurança informática</h3>
+          <p>Cópias de segurança, protecção contra vírus, contas e palavras-passe seguras, e boas práticas para a equipa.</p>
+          <span class="s2-para">Pequenas empresas · escritórios</span>
+        </article>
+        <article class="s2-card s2-card-dest">
+          <svg class="s2-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9 12 4l10 5-10 5L2 9Z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg>
+          <h3>Formação em tecnologia</h3>
+          <p>Cursos de programação, informática e uso de IA, para turmas abertas ou para a tua equipa.</p>
+          <a class="s2-link" href="#formacao">Ver formação →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSO -->
+  <section class="section p2" id="processo">
+    <div class="wrap">
+      <p class="eyebrow">Como trabalhamos</p>
+      <h2>Um processo simples, do pedido à entrega</h2>
+      <ol class="p2-passos">
+        <li><span class="p2-n">01</span><h3>Conversa</h3><p>Ouvimos o problema, pelo WhatsApp, por chamada ou presencialmente.</p></li>
+        <li><span class="p2-n">02</span><h3>Proposta</h3><p>Enviamos o que vamos fazer, o prazo e o preço, por escrito.</p></li>
+        <li><span class="p2-n">03</span><h3>Desenvolvimento</h3><p>Construímos e mostramos o progresso para ajustares a tempo.</p></li>
+        <li><span class="p2-n">04</span><h3>Entrega e suporte</h3><p>Entregamos, formamos quem vai usar e continuamos disponíveis.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FORMAÇÃO -->
+  <section class="section f2" id="formacao">
+    <div class="wrap f2-grid">
+      <div class="f2-intro">
+        <p class="eyebrow">Formação</p>
+        <h2>Academia ECOAI</h2>
+        <p class="lede">Formamos jovens, professores e equipas em programação e tecnologia, com aulas práticas que funcionam no telemóvel.</p>
+        <ul class="f2-lista">
+          <li>Turmas abertas, online e ao vivo</li>
+          <li>Formação à medida para escolas e empresas</li>
+          <li>Certificado e entrada em comunidades de programação dos nossos parceiros</li>
         </ul>
       </div>
+
+      <article class="f2-curso">
+        <div class="f2-curso-top">
+          <span class="f2-badge"><span></span>Inscrições abertas</span>
+          <span class="f2-turma">1.ª turma · 40 vagas</span>
+        </div>
+        <h3>Introdução à Programação com C++</h3>
+        <p>Do zero ao primeiro projecto em 4 semanas. Não precisas de computador nem de experiência.</p>
+        <dl class="f2-factos">
+          <div><dt>Início</dt><dd>2 de Novembro</dd></div>
+          <div><dt>Duração</dt><dd>1 mês</dd></div>
+          <div><dt>Formato</dt><dd>Online</dd></div>
+          <div><dt>Inscrição</dt><dd>600 MT</dd></div>
+        </dl>
+        <div class="f2-acoes">
+          <a class="btn btn-primary" href="inscricao.html">Ver curso e inscrever-me</a>
+          <a class="f2-prog" href="inscricao.html#programa">Ver programa</a>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- INSCRIÇÃO -->
-  <section class="section inscricao" id="inscricao">
-    <div class="wrap inscricao-grid">
-      <div class="inscricao-intro">
-        <p class="eyebrow">Ficha de inscrição</p>
-        <h2>Reserva a tua vaga</h2>
-        <p>
-          Preenche a ficha. Em até 48 horas contactamos-te por WhatsApp para
-          confirmar a vaga, o horário e o pagamento.
-        </p>
-        <ol class="passos">
-          <li>Envias a ficha</li>
-          <li>Confirmamos por WhatsApp</li>
-          <li>Pagas 600 MT (<a href="#pagamento">ver formas de pagamento</a>)</li>
-          <li>Recebes o link das aulas antes de 2 de Novembro</li>
-        </ol>
-        <p class="partilha">Conheces alguém que quer aprender? Envia-lhe a página de inscrição: <a href="inscricao.html">ecoaisolutions-mezt.onrender.com/inscricao.html</a></p>
-      </div>
-
-      <form class="form" id="inscricaoForm" novalidate>
-        <input type="hidden" name="_subject" value="Nova inscrição: Curso de C++">
-        <input type="hidden" name="pagina" value="Site principal">
-        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input type="hidden" name="curso" value="Introdução à Programação com C++ (1.ª turma)">
-
-        <div class="field">
-          <label for="i-nome">Nome completo</label>
-          <input id="i-nome" name="nome" type="text" autocomplete="name" required>
-        </div>
-
-        <div class="row-2">
-          <div class="field">
-            <label for="i-tel">Telefone / WhatsApp</label>
-            <input id="i-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="84 123 4567" required>
-          </div>
-          <div class="field">
-            <label for="i-email">Email <span class="opt">(opcional)</span></label>
-            <input id="i-email" name="email" type="email" autocomplete="email">
-          </div>
-        </div>
-
-        <div class="row-2">
-          <div class="field">
-            <label for="i-idade">Idade</label>
-            <input id="i-idade" name="idade" type="number" min="12" max="90" inputmode="numeric" required>
-          </div>
-          <div class="field">
-            <label for="i-local">Onde vives</label>
-            <select id="i-local" name="localidade" required>
-              <option value="">Escolhe…</option>
-              <option>Morrumbene</option>
-              <option>Maxixe</option>
-              <option>Cidade de Inhambane</option>
-              <option>Massinga</option>
-              <option>Homoíne</option>
-              <option>Outro distrito de Inhambane</option>
-              <option>Outra província</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row-2">
-          <div class="field">
-            <label for="i-ocup">Ocupação</label>
-            <select id="i-ocup" name="ocupacao" required>
-              <option value="">Escolhe…</option>
-              <option>Estudante do secundário</option>
-              <option>Estudante universitário</option>
-              <option>Professor(a)</option>
-              <option>Trabalhador(a)</option>
-              <option>À procura de emprego</option>
-              <option>Outro</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="i-esc">Escolaridade</label>
-            <select id="i-esc" name="escolaridade" required>
-              <option value="">Escolhe…</option>
-              <option>Até 10.ª classe</option>
-              <option>11.ª ou 12.ª classe</option>
-              <option>Técnico-profissional</option>
-              <option>Ensino superior (a frequentar)</option>
-              <option>Ensino superior (concluído)</option>
-            </select>
-          </div>
-        </div>
-
-        <fieldset class="field choice">
-          <legend>Já programaste antes?</legend>
-          <label><input type="radio" name="experiencia" value="Nunca" required> Nunca</label>
-          <label><input type="radio" name="experiencia" value="Um pouco"> Um pouco</label>
-          <label><input type="radio" name="experiencia" value="Sim"> Sim</label>
-        </fieldset>
-
-        <fieldset class="field choice">
-          <legend>Como vais assistir às aulas?</legend>
-          <label><input type="radio" name="equipamento" value="Computador" required> Computador</label>
-          <label><input type="radio" name="equipamento" value="Só telemóvel"> Só telemóvel</label>
-          <label><input type="radio" name="equipamento" value="Ainda não sei"> Ainda não sei</label>
-        </fieldset>
-
-        <div class="row-2">
-          <div class="field">
-            <label for="i-hor">Horário preferido</label>
-            <select id="i-hor" name="horario" required>
-              <option value="">Escolhe…</option>
-              <option>Dias úteis, fim da tarde (17h–19h)</option>
-              <option>Dias úteis, noite (19h–21h)</option>
-              <option>Sábado de manhã</option>
-              <option>Tanto faz</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="i-orig">Como soubeste do curso?</label>
-            <select id="i-orig" name="origem">
-              <option value="">Escolhe…</option>
-              <option>WhatsApp</option>
-              <option>Facebook</option>
-              <option>Escola ou universidade</option>
-              <option>Rádio</option>
-              <option>Cartaz</option>
-              <option>Amigo ou familiar</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="i-obs">Alguma pergunta ou observação? <span class="opt">(opcional)</span></label>
-          <textarea id="i-obs" name="observacoes" rows="3"></textarea>
-        </div>
-
-        <label class="consent" for="i-cons">
-          <input id="i-cons" name="consentimento" type="checkbox" value="Sim" required>
-          <span>Aceito que a ECOAI SOLUTIONS use estes dados só para gerir a minha inscrição e me contactar sobre o curso.</span>
-        </label>
-
-        <p class="form-error" id="inscricaoErro" role="alert" hidden></p>
-        <button type="submit" class="btn btn-primary btn-block" id="inscricaoBtn">Enviar inscrição</button>
-
-        <div class="form-done" id="inscricaoOk" role="status" hidden>
-          <h3>Inscrição recebida</h3>
-          <p id="inscricaoOkMsg">Obrigado. Vamos contactar-te por WhatsApp em até 48 horas.</p>
-          <a class="btn btn-ghost" id="inscricaoWa" href="#" target="_blank" rel="noopener" hidden>Abrir WhatsApp</a>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- PAGAMENTO -->
-  <section class="section pagamento" id="pagamento">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Pagamento</p>
-        <h2>Como pagar a inscrição</h2>
-        <p class="lede">A inscrição custa 600 MT. Podes pagar por M&#8209;Pesa, e&#8209;Mola, depósito ou transferência bancária.</p>
-      </div>
-      <div class="pag" data-pag>
-        <div class="pag-valor">
-          <div><span class="pag-valor-k">Valor da inscrição</span><b>600 MT</b></div>
-          <p>Pagamento único. A vaga fica tua quando recebermos o comprovativo.</p>
-        </div>
-
-        <h3 class="pag-passo"><span>1</span>Escolhe como queres pagar</h3>
-        <div class="pag-ops" role="tablist" aria-label="Formas de pagamento">
-          <button type="button" class="pag-op" role="tab" id="tab-mpesa" aria-controls="det-mpesa" aria-selected="true" data-op="mpesa" data-nome="M&#8209;Pesa" style="--c: #E60000">
-            <img class="pag-logo" src="img/pagamento/mpesa.png" alt="" width="44" height="44"><b>M&#8209;Pesa</b><small>Vodacom</small>
-          </button>
-          <button type="button" class="pag-op" role="tab" id="tab-emola" aria-controls="det-emola" aria-selected="false" data-op="emola" data-nome="e&#8209;Mola" style="--c: #F58220">
-            <img class="pag-logo" src="img/pagamento/emola.png" alt="" width="44" height="44"><b>e&#8209;Mola</b><small>Movitel</small>
-          </button>
-          <button type="button" class="pag-op" role="tab" id="tab-bci" aria-controls="det-bci" aria-selected="false" data-op="bci" data-nome="BCI" style="--c: #1F4E9A">
-            <img class="pag-logo redondo" src="img/pagamento/bci.png" alt="" width="44" height="44"><b>BCI</b><small>Banco</small>
-          </button>
-          <button type="button" class="pag-op" role="tab" id="tab-fnb" aria-controls="det-fnb" aria-selected="false" data-op="fnb" data-nome="FNB" style="--c: #009CA6">
-            <img class="pag-logo redondo" src="img/pagamento/fnb.png" alt="" width="44" height="44"><b>FNB</b><small>Banco</small>
-          </button>
-          <button type="button" class="pag-op" role="tab" id="tab-bim" aria-controls="det-bim" aria-selected="false" data-op="bim" data-nome="Millennium bim" style="--c: #C8005A">
-            <img class="pag-logo" src="img/pagamento/bim.png" alt="" width="44" height="44"><b>Millennium bim</b><small>Banco</small>
-          </button>
-        </div>
-
-        <h3 class="pag-passo"><span>2</span>Paga com estes dados</h3>
-          <div class="pag-det" role="tabpanel" id="det-mpesa" aria-labelledby="tab-mpesa" style="--c: #E60000">
-            <div class="pag-dados">
-              <div class="pag-dados-head"><img class="pag-logo" src="img/pagamento/mpesa.png" alt="" width="44" height="44"><b>M&#8209;Pesa</b></div>
-              <div class="pag-linha"><span class="pag-k">Número</span><span class="pag-v">84 381 3137</span><button type="button" class="copiar" data-copy="843813137" aria-label="Copiar Número M-Pesa">Copiar</button></div>
-              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">Jean Marie John</span></div>
-            </div>
-            <ol class="pag-como"><li>No teu telemóvel Vodacom, marca <b>*150#</b> e entra no M&#8209;Pesa.</li><li>Escolhe a opção de <b>transferir dinheiro</b> para outro número.</li><li>Número <b>843813137</b>, valor <b>600 MT</b>.</li><li>Confirma com o teu PIN e guarda a SMS de confirmação.</li></ol>
-          </div>
-          <div class="pag-det" role="tabpanel" id="det-emola" aria-labelledby="tab-emola" style="--c: #F58220" hidden>
-            <div class="pag-dados">
-              <div class="pag-dados-head"><img class="pag-logo" src="img/pagamento/emola.png" alt="" width="44" height="44"><b>e&#8209;Mola</b></div>
-              <div class="pag-linha"><span class="pag-k">Número</span><span class="pag-v">86 249 7846</span><button type="button" class="copiar" data-copy="862497846" aria-label="Copiar Número e-Mola">Copiar</button></div>
-              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">Jean Marie John</span></div>
-            </div>
-            <ol class="pag-como"><li>No teu telemóvel Movitel, marca <b>*898#</b> e entra no e&#8209;Mola.</li><li>Escolhe a opção de <b>transferir dinheiro</b> para outro número.</li><li>Número <b>862497846</b>, valor <b>600 MT</b>.</li><li>Confirma com o teu PIN e guarda a SMS de confirmação.</li></ol>
-          </div>
-          <div class="pag-det" role="tabpanel" id="det-bci" aria-labelledby="tab-bci" style="--c: #1F4E9A" hidden>
-            <div class="pag-dados">
-              <div class="pag-dados-head"><img class="pag-logo redondo" src="img/pagamento/bci.png" alt="" width="44" height="44"><b>BCI</b></div>
-              <div class="pag-linha"><span class="pag-k">Conta</span><span class="pag-v">31686757310001</span><button type="button" class="copiar" data-copy="31686757310001" aria-label="Copiar Conta BCI">Copiar</button></div>
-              <div class="pag-linha"><span class="pag-k">NIB</span><span class="pag-v">0008 0000 16867573101 28</span><button type="button" class="copiar" data-copy="000800001686757310128" aria-label="Copiar NIB BCI">Copiar</button></div>
-              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">ECOAI SOLUTIONS</span></div>
-            </div>
-            <ol class="pag-como"><li>Na app do banco, no balcão ou no ATM, escolhe <b>transferência</b> ou <b>depósito</b>.</li><li>Se a tua conta é do mesmo banco, usa o número de conta. Se é de outro banco, usa o <b>NIB</b>.</li><li>Valor <b>600 MT</b>. Na descrição escreve o <b>teu nome</b>.</li><li>Guarda o comprovativo (foto ou PDF).</li></ol>
-          </div>
-          <div class="pag-det" role="tabpanel" id="det-fnb" aria-labelledby="tab-fnb" style="--c: #009CA6" hidden>
-            <div class="pag-dados">
-              <div class="pag-dados-head"><img class="pag-logo redondo" src="img/pagamento/fnb.png" alt="" width="44" height="44"><b>FNB</b></div>
-              <div class="pag-linha"><span class="pag-k">Conta</span><span class="pag-v">4592529510001</span><button type="button" class="copiar" data-copy="4592529510001" aria-label="Copiar Conta FNB">Copiar</button></div>
-              <div class="pag-linha"><span class="pag-k">NIB</span><span class="pag-v">0014 0000 45925295101 92</span><button type="button" class="copiar" data-copy="001400004592529510192" aria-label="Copiar NIB FNB">Copiar</button></div>
-              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">ECOAI SOLUTIONS, SU, SA</span></div>
-            </div>
-            <ol class="pag-como"><li>Na app do banco, no balcão ou no ATM, escolhe <b>transferência</b> ou <b>depósito</b>.</li><li>Se a tua conta é do mesmo banco, usa o número de conta. Se é de outro banco, usa o <b>NIB</b>.</li><li>Valor <b>600 MT</b>. Na descrição escreve o <b>teu nome</b>.</li><li>Guarda o comprovativo (foto ou PDF).</li></ol>
-          </div>
-          <div class="pag-det" role="tabpanel" id="det-bim" aria-labelledby="tab-bim" style="--c: #C8005A" hidden>
-            <div class="pag-dados">
-              <div class="pag-dados-head"><img class="pag-logo" src="img/pagamento/bim.png" alt="" width="44" height="44"><b>Millennium bim</b></div>
-              <div class="pag-linha"><span class="pag-k">Conta</span><span class="pag-v">622623213</span><button type="button" class="copiar" data-copy="622623213" aria-label="Copiar Conta Millennium bim">Copiar</button></div>
-              <div class="pag-linha"><span class="pag-k">NIB</span><span class="pag-v">0001 0000 00622623213 57</span><button type="button" class="copiar" data-copy="000100000062262321357" aria-label="Copiar NIB Millennium bim">Copiar</button></div>
-              <div class="pag-linha"><span class="pag-k">Titular</span><span class="pag-v pag-tit">Jean John</span></div>
-            </div>
-            <ol class="pag-como"><li>Na app do banco, no balcão ou no ATM, escolhe <b>transferência</b> ou <b>depósito</b>.</li><li>Se a tua conta é do mesmo banco, usa o número de conta. Se é de outro banco, usa o <b>NIB</b>.</li><li>Valor <b>600 MT</b>. Na descrição escreve o <b>teu nome</b>.</li><li>Guarda o comprovativo (foto ou PDF).</li></ol>
-          </div>
-
-        <h3 class="pag-passo"><span>3</span>Envia o comprovativo</h3>
-        <div class="comprovativo">
-          <p>Envia a foto ou o PDF do comprovativo por WhatsApp para <b>84 381 3137</b>, com o teu nome completo. Depois confirmamos a tua vaga por WhatsApp.</p>
-          <a class="btn btn-primary" id="waComprovativo" href="#" target="_blank" rel="noopener" hidden>Enviar comprovativo por WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PERGUNTAS -->
-  <section class="section perguntas" id="perguntas">
-    <div class="wrap perguntas-grid">
-      <div>
-        <p class="eyebrow">Perguntas frequentes</p>
-        <h2>Antes de te inscreveres</h2>
-        <p class="perguntas-mais">Tens outra dúvida? <a href="#contacto">Fala connosco</a>.</p>
-      </div>
-      <div class="faq">
-        <details>
-          <summary>Preciso de saber programar?</summary>
-          <p>Não. O curso começa do zero: na primeira aula escreves o teu primeiro programa.</p>
-        </details>
-        <details>
-          <summary>Posso fazer o curso só com telemóvel?</summary>
-          <p>Sim. As aulas são online e os exercícios correm num compilador online gratuito que funciona no navegador do telemóvel. Precisas apenas de internet.</p>
-        </details>
-        <details>
-          <summary>Como pago os 600 MT?</summary>
-          <p>Por M&#8209;Pesa, e&#8209;Mola, ou depósito e transferência no BCI, FNB ou Millennium bim. Os números estão em <a href="#pagamento">Como pagar a inscrição</a>. Depois envia o comprovativo por WhatsApp; a vaga fica confirmada quando o pagamento chega.</p>
-        </details>
-        <details>
-          <summary>Como recebo o link das aulas?</summary>
-          <p>Por WhatsApp, antes da primeira aula a 2 de Novembro. Também entras no grupo da turma, onde ficam os exercícios e as dúvidas.</p>
-        </details>
-        <details>
-          <summary>Qual é o horário?</summary>
-          <p>É combinado com a turma. Na ficha indicas o horário que te dá mais jeito e escolhemos o que serve a mais pessoas.</p>
-        </details>
-        <details>
-          <summary>Recebo certificado?</summary>
-          <p>Sim. No fim recebes o certificado da ECOAI SOLUTIONS e ficas com o teu projecto final para mostrar. Também te ligamos a comunidades de programação através dos nossos parceiros, para continuares a aprender depois do curso.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVIÇOS -->
-  <section class="section servicos" id="servicos">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Serviços</p>
-        <h2>O que fazemos para escolas, negócios e instituições</h2>
-      </div>
-      <div class="servicos-grid">
-        <article class="servico">
-          <h3>Formação em tecnologia</h3>
-          <p>Cursos de programação, informática na óptica do utilizador, Excel e uso de inteligência artificial no trabalho. Para turmas abertas ou equipas de uma instituição.</p>
-        </article>
-        <article class="servico">
-          <h3>Sites e presença digital</h3>
-          <p>Sites rápidos para lodges, restaurantes e lojas, perfil no Google Maps e páginas nas redes sociais, com manutenção mensal.</p>
-        </article>
-        <article class="servico">
-          <h3>Computadores e redes</h3>
-          <p>Instalação e manutenção de computadores, redes e internet para escolas, ONGs, administrações e pequenas empresas.</p>
-        </article>
-        <article class="servico">
-          <h3>Software e dados</h3>
-          <p>Sistemas simples à medida (stock, notas, registos), análise de dados e consultoria em tecnologias de informação.</p>
-        </article>
-      </div>
-      <p class="servicos-cta">Precisa de um orçamento? <a href="#contacto">Fale connosco</a> e respondemos em 48 horas.</p>
+  <!-- TECNOLOGIAS -->
+  <section class="t2" aria-labelledby="t2-titulo">
+    <div class="wrap t2-inner">
+      <h2 id="t2-titulo" class="t2-tit">Tecnologias com que trabalhamos</h2>
+      <ul class="t2-lista">
+        <li>C++</li><li>Python</li><li>JavaScript</li><li>HTML e CSS</li><li>SQL</li><li>Linux</li><li>Git</li><li>Redes TCP/IP</li><li>Google Workspace</li>
+      </ul>
     </div>
   </section>
 
@@ -439,8 +199,8 @@
         <h2>Eco de economia local, AI de inteligência artificial</h2>
         <p>
           A ECOAI SOLUTIONS é uma empresa moçambicana de tecnologia, com base na
-          vila de Morrumbene, província de Inhambane. Acreditamos que a tecnologia deve criar
-          competências e emprego no lugar onde é usada.
+          vila de Morrumbene, província de Inhambane. Acreditamos que a tecnologia
+          deve criar competências e emprego no lugar onde é usada.
         </p>
         <ul class="valores">
           <li><b>Local primeiro.</b> Soluções pensadas para a rede, a energia e os recursos que existem aqui.</li>
@@ -463,7 +223,6 @@
             <li>Realidade aumentada</li>
           </ul>
         </div>
-
         <div class="comunidade">
           <h3>Comunidade</h3>
           <p>Participamos como parceiros em eventos que formam talento tecnológico em Moçambique:</p>
@@ -476,12 +235,42 @@
     </div>
   </section>
 
+  <!-- PERGUNTAS -->
+  <section class="section perguntas" id="perguntas">
+    <div class="wrap perguntas-grid">
+      <div>
+        <p class="eyebrow">Perguntas frequentes</p>
+        <h2>O que mais nos perguntam</h2>
+        <p class="perguntas-mais">Tens outra dúvida? <a href="#contacto">Fala connosco</a>.</p>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Quanto custa um site ou um sistema?</summary>
+          <p>Depende do que precisas: número de páginas, funcionalidades e se queres manutenção mensal. Diz-nos o que tens em mente e enviamos uma proposta com o preço por escrito, sem compromisso.</p>
+        </details>
+        <details>
+          <summary>Trabalham fora de Inhambane?</summary>
+          <p>Sim. Sites, sistemas, dados e formação fazemos para todo o país, online. Instalação de redes e suporte presencial fazemos sobretudo na província de Inhambane.</p>
+        </details>
+        <details>
+          <summary>Dão formação para escolas e empresas?</summary>
+          <p>Sim. Preparamos cursos à medida (programação, informática na óptica do utilizador, Excel e uso de IA no trabalho), no vosso espaço ou online.</p>
+        </details>
+        <details>
+          <summary>Como me inscrevo no curso de C++?</summary>
+          <p>Na <a href="inscricao.html">página do curso</a>: preenches a ficha em 2 minutos, pagas a inscrição e envias o comprovativo por WhatsApp.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACTO -->
-  <section class="section contacto" id="contacto">
+  <section class="section contacto c2" id="contacto">
     <div class="wrap contacto-grid">
       <div>
         <p class="eyebrow">Contacto</p>
-        <h2>Fale connosco</h2>
+        <h2>Vamos falar do teu projecto</h2>
+        <p class="lede">Conta-nos o que precisas. Respondemos em até 48 horas com os próximos passos.</p>
         <ul class="canais">
           <li data-canal="whatsapp" hidden>
             <span class="canal-label">WhatsApp</span>
@@ -498,25 +287,40 @@
         </ul>
       </div>
 
-      <form class="form" id="contactoForm" novalidate>
-        <input type="hidden" name="_subject" value="Contacto pelo site ECOAI">
+      <form class="form c2-form" id="contactoForm" novalidate>
+        <input type="hidden" name="_subject" value="Pedido pelo site ECOAI">
         <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="field">
-          <label for="c-nome">Nome</label>
-          <input id="c-nome" name="nome" type="text" autocomplete="name" required>
+        <div class="row-2">
+          <div class="field">
+            <label for="c-nome">Nome</label>
+            <input id="c-nome" name="nome" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="c-tel">Telefone ou email</label>
+            <input id="c-tel" name="contacto" type="text" required>
+          </div>
         </div>
         <div class="field">
-          <label for="c-tel">Telefone ou email</label>
-          <input id="c-tel" name="contacto" type="text" required>
+          <label for="c-serv">O que precisas?</label>
+          <select id="c-serv" name="servico" required>
+            <option value="">Escolhe…</option>
+            <option>Software à medida</option>
+            <option>Site ou presença digital</option>
+            <option>Redes e suporte informático</option>
+            <option>Dados e inteligência artificial</option>
+            <option>Segurança informática</option>
+            <option>Formação para a minha equipa</option>
+            <option>Outro assunto</option>
+          </select>
         </div>
         <div class="field">
-          <label for="c-msg">Mensagem</label>
-          <textarea id="c-msg" name="mensagem" rows="4" required></textarea>
+          <label for="c-msg">Descreve o pedido</label>
+          <textarea id="c-msg" name="mensagem" rows="4" required placeholder="Ex.: Tenho uma loja em Maxixe e quero um sistema de stock."></textarea>
         </div>
         <p class="form-error" id="contactoErro" role="alert" hidden></p>
-        <button type="submit" class="btn btn-primary" id="contactoBtn">Enviar mensagem</button>
+        <button type="submit" class="btn btn-primary" id="contactoBtn">Enviar pedido</button>
         <div class="form-done" id="contactoOk" role="status" hidden>
-          <h3>Mensagem enviada</h3>
+          <h3>Pedido enviado</h3>
           <p id="contactoOkMsg">Obrigado. Respondemos em até 48 horas.</p>
           <a class="btn btn-ghost" id="contactoWa" href="#" target="_blank" rel="noopener" hidden>Abrir WhatsApp</a>
         </div>
@@ -538,14 +342,15 @@
         <img src="logo-ecoai.svg" alt="" width="32" height="32">
         <span>ECOAI SOLUTIONS</span>
       </div>
-      <p>Formação, software e soluções digitais a partir de Morrumbene, Inhambane.</p>
+      <p>Engenharia de software, soluções digitais e formação, a partir de Morrumbene, Inhambane.</p>
     </div>
     <nav class="footer-col" aria-label="Rodapé">
-      <span class="footer-h">Site</span>
-      <a href="#curso">Curso de C++</a>
-      <a href="#inscricao">Inscrição</a>
+      <span class="footer-h">Empresa</span>
       <a href="#servicos">Serviços</a>
+      <a href="#processo">Como trabalhamos</a>
+      <a href="#formacao">Formação</a>
       <a href="#sobre">Sobre</a>
+      <a href="inscricao.html">Curso de C++</a>
     </nav>
     <div class="footer-col">
       <span class="footer-h">Contacto</span>

@@ -134,7 +134,7 @@ function summary(form, title) {
     nome: 'Nome', telefone: 'Telefone', email: 'Email', idade: 'Idade',
     localidade: 'Localidade', ocupacao: 'Ocupação', escolaridade: 'Escolaridade',
     experiencia: 'Já programou', equipamento: 'Vai praticar com', horario: 'Horário',
-    origem: 'Soube por', observacoes: 'Observações', contacto: 'Contacto', mensagem: 'Mensagem'
+    origem: 'Soube por', observacoes: 'Observações', contacto: 'Contacto', servico: 'Serviço', mensagem: 'Mensagem'
   };
   const lines = [title];
   new FormData(form).forEach((v, k) => {
@@ -240,7 +240,7 @@ setupForm({
   done: $('#contactoOk'),
   doneMsg: $('#contactoOkMsg'),
   doneWa: $('#contactoWa'),
-  waTitle: 'Contacto pelo site ECOAI',
+  waTitle: 'Pedido pelo site ECOAI',
   okText: 'Obrigado. Respondemos em até 48 horas.'
 });
 
