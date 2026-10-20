@@ -91,7 +91,18 @@ function faixa(idade) {
   if (n < 35) return '25 a 34';
   return '35 ou mais';
 }
-const dia = iso => (iso || '').slice(0, 10);
+// dia local (Maputo) no formato AAAA-MM-DD; aceita ISO ou dd/mm/aaaa
+function paraData(v) {
+  if (!v) return null;
+  let d = new Date(v);
+  if (isNaN(d)) {
+    const m = String(v).match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+    if (m) d = new Date(+m[3], +m[2] - 1, +m[1]);
+  }
+  return isNaN(d) ? null : d;
+}
+const chaveDia = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const dia = v => { const d = paraData(v); return d ? chaveDia(d) : ''; };
 
 /* ---------- desenho ---------- */
 function render() {
@@ -143,14 +154,20 @@ function renderDias(ativos) {
   ativos.forEach(r => { const d = dia(r.data); if (d) contagem.set(d, (contagem.get(d) || 0) + 1); });
   if (!contagem.size) { el('dias').innerHTML = '<p class="vazio">Ainda sem inscrições.</p>'; el('diasSub').textContent = ''; return; }
   const ordenados = [...contagem.keys()].sort();
-  const ini = Date.parse(ordenados[0]);
-  const fim = Math.max(Date.parse(ordenados.at(-1)), Date.parse(new Date().toISOString().slice(0, 10)));
+  const [ay, am, ad] = ordenados[0].split('-').map(Number);
+  const hoje = chaveDia(new Date());
+  const ultimo = ordenados.at(-1) > hoje ? ordenados.at(-1) : hoje;
   const dias = [];
-  for (let t = ini; t <= fim; t += 864e5) dias.push(new Date(t).toISOString().slice(0, 10));
+  for (let i = 0; i < 120; i++) {
+    const k = chaveDia(new Date(ay, am - 1, ad + i));
+    dias.push(k);
+    if (k >= ultimo) break;
+  }
   const max = Math.max(1, ...dias.map(d => contagem.get(d) || 0));
-  const fmt = d => `${Number(d.slice(8))}/${Number(d.slice(5, 7))}`;
+  const fmt = d => `${Number(d.slice(8, 10))}/${Number(d.slice(5, 7))}`;
   const melhor = dias.reduce((a, d) => (contagem.get(d) || 0) > (contagem.get(a) || 0) ? d : a, dias[0]);
-  el('diasSub').textContent = `Melhor dia: ${fmt(melhor)}, com ${contagem.get(melhor)} ${contagem.get(melhor) === 1 ? 'inscrição' : 'inscrições'}`;
+  const nm = contagem.get(melhor) || 0;
+  el('diasSub').textContent = `Melhor dia: ${fmt(melhor)}, com ${nm} ${nm === 1 ? 'inscrição' : 'inscrições'}`;
   el('dias').innerHTML = `<div class="dias-grade" style="--n:${dias.length}">` + dias.map((d, i) => {
     const n = contagem.get(d) || 0;
     const mostrarData = dias.length <= 14 || i % Math.ceil(dias.length / 10) === 0 || i === dias.length - 1;
@@ -203,9 +220,12 @@ function msgWhats(r) {
   return `Olá ${nome}, daqui fala a ECOAI SOLUTIONS.`;
 }
 function waNum(t) {
-  let d = String(t || '').replace(/\D/g, '');
+  // usa só o primeiro número quando a pessoa escreve dois (ex.: "871425704/879079814")
+  const primeiro = String(t || '').split(/[\/,;|]|\sou\s/i)[0];
+  let d = primeiro.replace(/\D/g, '');
+  if (d.startsWith('00')) d = d.slice(2);
   if (d.length === 9) d = '258' + d;
-  return d;
+  return d.length === 12 && d.startsWith('258') ? d : '';
 }
 
 function renderTabela() {
