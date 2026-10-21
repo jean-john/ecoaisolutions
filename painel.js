@@ -215,7 +215,20 @@ el('busca').addEventListener('input', renderTabela);
 
 function msgWhats(r) {
   const nome = (r.nome || '').split(' ')[0];
-  if (r.estado === 'Pendente') return `Olá ${nome}, daqui fala a ECOAI SOLUTIONS. Recebemos a tua inscrição no curso Introdução à Programação com C++, que começa a 2 de Novembro. Para confirmar a vaga, paga ${PRECO} MT por M-Pesa (84 381 3137), e-Mola (86 249 7846) ou transferência bancária. Todas as contas estão aqui: https://ecoaisolutions-mezt.onrender.com/#pagamento . Depois envia-nos o comprovativo nesta conversa.`;
+  if (r.estado === 'Pendente') return `Olá ${nome}! 😊
+
+Aqui é o Jean, da ECOAI SOLUTIONS. Recebemos a tua inscrição no curso Introdução à Programação com C++ e ficamos mesmo contentes por quereres aprender connosco! 💻
+
+O curso começa na segunda-feira, 2 de Novembro. Vamos do zero, passo a passo, e no fim vais ter o teu primeiro projecto e o certificado.
+
+Para garantir a tua vaga, falta só o pagamento da inscrição (${PRECO} MT). Podes pagar por:
+📱 M-Pesa: 84 381 3137 (Jean Marie John)
+📱 e-Mola: 86 249 7846 (Jean Marie John)
+🏦 Banco (BCI, FNB ou Millennium bim): todas as contas estão aqui 👉 https://ecoaisolutions-mezt.onrender.com/inscricao.html#pagamento
+
+Depois é só mandares o comprovativo nesta conversa e eu junto-te ao grupo da turma. 🙌
+
+Se tiveres alguma dúvida, ou se precisares de mais tempo para pagar, diz-me à vontade. Estou aqui para ajudar!`;
   if (r.estado === 'Pago') return `Olá ${nome}, confirmamos o teu pagamento de ${PRECO} MT. Obrigado! Antes de 2 de Novembro enviamos-te o link das aulas e o horário.`;
   return `Olá ${nome}, daqui fala a ECOAI SOLUTIONS.`;
 }
