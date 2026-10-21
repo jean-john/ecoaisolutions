@@ -232,6 +232,20 @@ Se tiveres alguma dúvida, ou se precisares de mais tempo para pagar, diz-me à 
   if (r.estado === 'Pago') return `Olá ${nome}, confirmamos o teu pagamento de ${PRECO} MT. Obrigado! Antes de 2 de Novembro enviamos-te o link das aulas e o horário.`;
   return `Olá ${nome}, daqui fala a ECOAI SOLUTIONS.`;
 }
+/* abrir no WhatsApp Web (ex.: conta Business ligada no navegador) ou na aplicação */
+let usarWeb = false;
+try { usarWeb = localStorage.getItem('ecoai-wa-web') === '1'; } catch (_) {}
+const linkWa = (num, txt) => usarWeb
+  ? `https://web.whatsapp.com/send?phone=${num}&text=${encodeURIComponent(txt)}`
+  : `https://wa.me/${num}?text=${encodeURIComponent(txt)}`;
+el('optWeb').checked = usarWeb;
+el('optWeb').addEventListener('change', e => {
+  usarWeb = e.target.checked;
+  try { localStorage.setItem('ecoai-wa-web', usarWeb ? '1' : '0'); } catch (_) {}
+  renderTabela();
+  toast(usarWeb ? 'As mensagens abrem no WhatsApp Web' : 'As mensagens abrem na aplicação');
+});
+
 function waNum(t) {
   // usa só o primeiro número quando a pessoa escreve dois (ex.: "871425704/879079814")
   const primeiro = String(t || '').split(/[\/,;|]|\sou\s/i)[0];
@@ -255,7 +269,7 @@ function renderTabela() {
     return `<tr>
       <td class="t-data">${esc(data)}</td>
       <td><b>${esc(r.nome)}</b>${r.email ? `<br><small>${esc(r.email)}</small>` : ''}</td>
-      <td class="t-tel">${esc(r.telefone)}${num ? `<br><a class="wa-mini" href="https://wa.me/${num}?text=${encodeURIComponent(msgWhats(r))}" target="_blank" rel="noopener">Mensagem</a>` : ''}</td>
+      <td class="t-tel">${esc(r.telefone)}${num ? `<br><a class="wa-mini" href="${linkWa(num, msgWhats(r))}" target="${usarWeb ? 'ecoai-whatsapp' : '_blank'}" rel="noopener">Mensagem</a>` : ''}</td>
       <td>${esc(r.localidade)}</td>
       <td>${esc(r.ocupacao)}</td>
       <td>${esc(r.equipamento)}</td>
