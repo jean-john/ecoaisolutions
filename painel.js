@@ -9,6 +9,7 @@ const META = 40;              // vagas da turma
 const INICIO = '2026-11-02';  // primeira aula
 const ESTADOS = ['Pendente', 'Pago', 'Link enviado', 'Desistiu'];
 const PAGOS = ['Pago', 'Link enviado'];
+const COMISSAO = 100;   // MT por indicado que pagou
 
 const el = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -134,8 +135,31 @@ function render() {
   ];
   el('graficos').innerHTML = grupos.map(([titulo, dados]) => barras(titulo, dados, ativos.length)).join('');
 
+  renderAngariadores(ativos);
   renderFiltros();
   renderTabela();
+}
+
+function indicadoPor(r) {
+  const x = String(r.observacoes || '').match(/Indicado por:\s*([^.]+)\./);
+  return x ? x[1].trim() : '';
+}
+function renderAngariadores(ativos) {
+  const grupos = new Map();
+  ativos.forEach(r => {
+    const quem = indicadoPor(r);
+    if (!quem) return;
+    const tel = quem.replace(/\D/g, '').slice(-9);
+    const chave = tel.length === 9 ? tel : quem.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ');
+    if (!grupos.has(chave)) grupos.set(chave, { nome: quem, lista: [] });
+    grupos.get(chave).lista.push(r);
+  });
+  el('blocoAng').hidden = !grupos.size;
+  el('angLinhas').innerHTML = [...grupos.values()]
+    .map(g => ({ ...g, pagos: g.lista.filter(r => PAGOS.includes(r.estado)).length }))
+    .sort((a, b) => b.pagos - a.pagos || b.lista.length - a.lista.length)
+    .map(g => `<tr><td><b>${esc(g.nome)}</b></td><td>${g.lista.length}</td><td>${g.pagos}</td><td><b>${mt(g.pagos * COMISSAO)}</b></td><td><small>${g.lista.map(r => esc(r.nome) + (PAGOS.includes(r.estado) ? ' ✓' : '')).join(', ')}</small></td></tr>`)
+    .join('');
 }
 
 function barras(titulo, dados, total) {
