@@ -144,7 +144,7 @@ function barras(titulo, dados, total) {
     <li title="${esc(k)}: ${n} (${pct(n, total)}%)">
       <span class="b-nome">${esc(k)}</span>
       <span class="b-trilho"><span class="b-barra" style="width:${Math.max(2, n / max * 100)}%"></span></span>
-      <span class="b-val">${n}<small>${pct(n, total)}%</small></span>
+      <span class="b-val">${n}<small> · ${pct(n, total)}%</small></span>
     </li>`).join('') : '<li class="b-vazio">Ainda sem dados</li>';
   return `<article class="bloco"><h2>${esc(titulo)}</h2><ul class="barras">${linhasHtml}</ul></article>`;
 }
@@ -193,6 +193,12 @@ function renderRelatorio(ativos, pagos, pendentes) {
     `A maior parte vem de <b>${esc(loc[0])}</b> (${pct(loc[1], n)}%)${fora ? `, e ${fora} de outras províncias` : ''}. A ocupação mais comum é <b>${esc(ocup[0]).toLowerCase()}</b> (${pct(ocup[1], n)}%).`,
     `${pct(tel, n)}% vão assistir <b>só pelo telemóvel</b> e ${pct(novatos, n)}% <b>nunca programaram</b>: as aulas devem começar devagar e os exercícios devem funcionar no telemóvel.`,
     `O horário mais pedido é <b>${esc(hor[0]).toLowerCase()}</b> (${pct(hor[1], n)}%).`,
+    (() => {
+      const m = new Map();
+      ativos.forEach(r => { const x = String(r.observacoes || '').match(/Indicado por:\s*([^.]+)\./); if (x) { const k = x[1].trim(); m.set(k, (m.get(k) || 0) + 1); } });
+      const top = [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3);
+      return top.length ? `Quem mais trouxe colegas: ${top.map(([k, v]) => `<b>${esc(k)}</b> (${v})`).join(', ')}. Agradece-lhes! 🙏` : '';
+    })(),
     orig[0] !== 'Não indicado' ? `O canal que mais inscrições trouxe foi <b>${esc(orig[0])}</b> (${pct(orig[1], n)}%): vale a pena reforçar a divulgação aí.` : ''
   ].filter(Boolean);
   el('relatorio').innerHTML = '<ul class="relatorio-lista">' + frases.map(f => `<li>${f}</li>`).join('') + '</ul>';

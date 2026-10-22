@@ -598,7 +598,7 @@ code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2
 .b-trilho { height: 12px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
 .b-barra { display: block; height: 100%; background: var(--blue); border-radius: 0 4px 4px 0; }
 .b-val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
-.b-val small { font-weight: 400; color: var(--ink-soft); margin-left: 6px; }
+.b-val small { font-weight: 400; color: var(--ink-soft); margin-left: 2px; }
 .b-vazio { color: var(--ink-soft); display: block !important; }
 
 .dias { overflow-x: auto; }

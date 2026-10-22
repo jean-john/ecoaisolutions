@@ -134,7 +134,7 @@ function summary(form, title) {
     nome: 'Nome', telefone: 'Telefone', email: 'Email', idade: 'Idade',
     localidade: 'Localidade', ocupacao: 'Ocupação', escolaridade: 'Escolaridade',
     experiencia: 'Já programou', equipamento: 'Vai praticar com', horario: 'Horário',
-    origem: 'Soube por', observacoes: 'Observações', contacto: 'Contacto', servico: 'Serviço', mensagem: 'Mensagem'
+    origem: 'Soube por', indicado: 'Indicado por', observacoes: 'Observações', contacto: 'Contacto', servico: 'Serviço', mensagem: 'Mensagem'
   };
   const lines = [title];
   new FormData(form).forEach((v, k) => {
@@ -155,6 +155,12 @@ function setupForm({ form, btn, err, done, doneMsg, doneWa, waTitle, okText }) {
       err.hidden = false;
       first.focus();
       return;
+    }
+    // "Quem te indicou" vai também nas observações, para ficar gravado na folha
+    const indic = form.querySelector('#i-indic');
+    const obs = form.querySelector('#i-obs');
+    if (indic && obs && indic.value.trim() && !obs.value.includes('Indicado por:')) {
+      obs.value = `Indicado por: ${indic.value.trim()}.` + (obs.value.trim() ? ' ' + obs.value.trim() : '');
     }
     const text = summary(form, waTitle);
 
