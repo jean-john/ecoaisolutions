@@ -138,6 +138,7 @@ function render() {
   renderAngariadores(ativos);
   renderFiltros();
   renderTabela();
+  renderEnvios();
 }
 
 function indicadoPor(r) {
@@ -251,17 +252,181 @@ Daqui fala a equipa da ECOAI SOLUTIONS. Recebemos a tua inscrição no curso Int
 
 O curso começa na segunda-feira, 2 de Novembro. Vamos do zero, passo a passo, e no fim vais ter o teu primeiro projecto e o certificado.
 
-Para garantir a tua vaga, falta só o pagamento da inscrição (${PRECO} MT). Podes pagar por:
+${(() => { const f = diasAte(); return f > 1 ? `Faltam só ${f} dias! ⏳ ` : f === 1 ? 'Já é amanhã! ⏳ ' : ''; })()}Para garantir a tua vaga, falta só o pagamento da inscrição (${PRECO} MT). Podes pagar por:
 📱 M-Pesa: 84 381 3137 (Jean Marie John)
 📱 e-Mola: 86 249 7846 (Jean Marie John)
 🏦 Banco (BCI, FNB ou Millennium bim): todas as contas estão aqui 👉 https://ecoaisolutions-mezt.onrender.com/inscricao.html#pagamento
 
-Depois é só mandares o comprovativo nesta conversa e juntamos-te ao grupo da turma. 🙌
+O grupo da turma já está aberto! Assim que mandares o comprovativo nesta conversa, adicionamos-te logo. 🙌
 
 Se tiveres alguma dúvida, ou se precisares de mais tempo para pagar, diz-nos à vontade. Estamos aqui para ajudar!`;
-  if (r.estado === 'Pago') return `Olá ${nome}, confirmamos o teu pagamento de ${PRECO} MT. Obrigado! Antes de 2 de Novembro enviamos-te o link das aulas e o horário.`;
+  if (PAGOS.includes(r.estado)) return msgGrupo(r);
   return `Olá ${nome}, daqui fala a ECOAI SOLUTIONS.`;
 }
+function diasAte() { return Math.max(0, Math.ceil((Date.parse(INICIO) - Date.now()) / 864e5)); }
+function msgGrupo(r) {
+  const nome = (r.nome || '').split(' ')[0];
+  const link = linkGrupo();
+  return `Olá ${nome}! 🎉
+
+Confirmámos o teu pagamento: estás oficialmente na 1.ª turma de C++ da ECOAI SOLUTIONS! Muito obrigado pela confiança. 💙
+
+${link ? `Entra aqui no grupo da turma 👇\n${link}\n\nÉ lá que vamos partilhar o horário, os materiais e o link da primeira aula, a 2 de Novembro.` : 'Antes de 2 de Novembro adicionamos-te ao grupo da turma, onde vamos partilhar o horário, os materiais e o link da primeira aula.'}
+
+Conheces alguém que também queira aprender? Por cada pessoa que trouxeres e que pague, recebes ${COMISSAO} MT. 😉
+
+Até já! 💻`;
+}
+
+/* ---------- enviar mensagens em sequência ---------- */
+const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z\s]/g, ' ').replace(/\s+/g, ' ').trim();
+function linkGrupo() { const v = el('linkGrupo').value.trim(); return /^https?:\/\/\S+$/.test(v) ? v : ''; }
+try { el('linkGrupo').value = localStorage.getItem('ecoai-grupo') || ''; } catch (_) {}
+el('linkGrupo').addEventListener('input', () => {
+  try { localStorage.setItem('ecoai-grupo', el('linkGrupo').value.trim()); } catch (_) {}
+  renderEnvios(); renderTabela();
+});
+
+function lista(nomes) { return nomes.length < 2 ? nomes.join('') : nomes.slice(0, -1).join(', ') + ' e ' + nomes.at(-1); }
+function angariadores() {
+  const ativos = linhas.filter(r => r.estado !== 'Desistiu');
+  const grupos = new Map();
+  ativos.forEach(r => {
+    const quem = indicadoPor(r);
+    if (!quem) return;
+    const tel = quem.replace(/\D/g, '').slice(-9);
+    const k = tel.length === 9 ? tel : norm(quem);
+    if (!grupos.has(k)) grupos.set(k, { quem, lista: [] });
+    grupos.get(k).lista.push(r);
+  });
+  return [...grupos.entries()].map(([k, g]) => {
+    const nomeQuem = g.quem.replace(/[\d+]/g, ' ').replace(/[-–·,]+\s*$/, '').replace(/\s+/g, ' ').trim();
+    const p = norm(nomeQuem).split(' ');
+    // o número que a própria pessoa escreveu na inscrição é mais fiável do que o escrito por quem foi indicado
+    const inscrito = p.length > 1 && linhas.find(r => { const n = ' ' + norm(r.nome) + ' '; return n.includes(' ' + p[0] + ' ') && n.includes(' ' + p.at(-1) + ' '); });
+    const num = (inscrito && waNum(inscrito.telefone)) || waNum(g.quem);
+    const pagos = g.lista.filter(r => PAGOS.includes(r.estado));
+    const primeiro = n => (n || '').split(' ')[0];
+    const nome = primeiro(nomeQuem);
+    const msg = pagos.length
+      ? `Olá ${nome}! 😊 A equipa da ECOAI SOLUTIONS quer agradecer-te por teres trazido ${lista(g.lista.map(r => primeiro(r.nome)))} para o curso de C++. ${pagos.length === 1 ? `O pagamento de ${primeiro(pagos[0].nome)} já foi confirmado` : `${pagos.length} já confirmaram o pagamento`}, por isso tens ${mt(pagos.length * COMISSAO)} a receber! 🎉
+
+Conheces mais alguém que queira aprender a programar? Cada pessoa que trouxeres e que pague são mais ${COMISSAO} MT para ti. Obrigado por acreditares em nós! 🙏`
+      : `Olá ${nome}! 😊 Obrigado por teres falado do curso de C++ a ${lista(g.lista.map(r => primeiro(r.nome)))}. Ficámos muito contentes! Assim que ${g.lista.length === 1 ? 'confirmar' : 'confirmarem'} o pagamento, recebes ${COMISSAO} MT por cada pessoa. 🎉
+
+Se puderes dar um toque, ajudas muito. Obrigado! 🙏`;
+    return { id: 'ang-' + k, nome: nomeQuem || g.quem, tel: (inscrito && inscrito.telefone) || g.quem.replace(/[^\d+]/g, ''), num, msg, nota: pagos.length ? `${mt(pagos.length * COMISSAO)} a receber` : 'indicados ainda por pagar' };
+  }).filter(x => x.num);
+}
+
+const CAMPANHAS = {
+  pendentes: {
+    titulo: 'Lembrete a quem ainda não pagou',
+    sub: 'Mensagem carinhosa com as formas de pagamento',
+    itens: () => linhas.filter(r => r.estado === 'Pendente' && waNum(r.telefone))
+      .map(r => ({ id: 'p-' + r.linha, nome: r.nome, tel: r.telefone, num: waNum(r.telefone), msg: msgWhats(r), r }))
+  },
+  grupo: {
+    titulo: 'Link do grupo a quem já pagou',
+    sub: 'Depois de abrir, o estado passa a «Link enviado»',
+    precisaLink: true,
+    itens: () => linhas.filter(r => r.estado === 'Pago' && waNum(r.telefone))
+      .map(r => ({ id: 'g-' + r.linha, nome: r.nome, tel: r.telefone, num: waNum(r.telefone), msg: msgGrupo(r), r, depois: 'Link enviado' }))
+  },
+  angariadores: {
+    titulo: 'Agradecer a quem trouxe colegas',
+    sub: 'Diz quanto cada um tem a receber',
+    itens: angariadores
+  }
+};
+
+let fila = null; // { camp, itens, i, feitos:Set }
+const chaveEnviados = camp => `ecoai-env-${camp}-${chaveDia(new Date())}`;
+function lerEnviados(camp) { try { return new Set(JSON.parse(localStorage.getItem(chaveEnviados(camp)) || '[]')); } catch (_) { return new Set(); } }
+function gravarEnviados(camp, s) { try { localStorage.setItem(chaveEnviados(camp), JSON.stringify([...s])); } catch (_) {} }
+
+function renderEnvios() {
+  if (!el('campanhas')) return;
+  el('campanhas').innerHTML = Object.entries(CAMPANHAS).map(([k, c]) => {
+    const itens = c.itens();
+    const enviados = lerEnviados(k);
+    const porEnviar = itens.filter(x => !enviados.has(x.id)).length;
+    const semLink = c.precisaLink && !linkGrupo();
+    const off = !itens.length || semLink;
+    const estado = semLink ? 'Cola primeiro o link do grupo, acima'
+      : !itens.length ? 'Ninguém nesta lista agora'
+      : porEnviar ? `${porEnviar} por enviar hoje` : 'Todos enviados hoje ✓';
+    return `<button type="button" class="campanha${fila && fila.camp === k ? ' ativa' : ''}" data-camp="${k}"${off ? ' disabled' : ''}>
+      <span class="c-n">${itens.length}</span>
+      <span class="c-txt"><b>${esc(c.titulo)}</b><small>${esc(c.sub)}</small><em>${esc(estado)}</em></span>
+    </button>`;
+  }).join('');
+  renderFila();
+}
+
+function renderFila() {
+  const box = el('fila');
+  if (!fila) { box.hidden = true; box.innerHTML = ''; return; }
+  box.hidden = false;
+  const c = CAMPANHAS[fila.camp];
+  const total = fila.itens.length;
+  const x = fila.itens[fila.i];
+  const listaHtml = `<ol class="fila-lista">${fila.itens.map((it, j) =>
+    `<li class="${fila.feitos.has(it.id) ? 'feito' : ''}${j === fila.i ? ' atual' : ''}"><button type="button" class="link-btn" data-ir="${j}">${esc(it.nome)}</button>${fila.feitos.has(it.id) ? ' <span aria-label="enviado">✓</span>' : ''}</li>`).join('')}</ol>`;
+  if (!x) {
+    box.innerHTML = `<div class="fila-topo"><b>${esc(c.titulo)}</b><button type="button" class="link-btn" data-fila="fechar">Fechar</button></div>
+      <p class="fila-fim">Terminaste a lista: ${fila.feitos.size} de ${total} ${fila.feitos.size === 1 ? 'mensagem aberta' : 'mensagens abertas'}. 🎉</p>${listaHtml}`;
+    return;
+  }
+  const alvo = usarWeb ? 'ecoai-whatsapp' : '_blank';
+  box.innerHTML = `<div class="fila-topo"><b>${esc(c.titulo)}</b><span>${fila.i + 1} de ${total}</span><button type="button" class="link-btn" data-fila="fechar">Fechar</button></div>
+    <div class="fila-pessoa">
+      <p class="fila-nome">${esc(x.nome)}${fila.feitos.has(x.id) ? ' <small>· já aberta</small>' : ''}</p>
+      <p class="fila-tel">${esc(x.tel)}${x.nota ? ' · ' + esc(x.nota) : ''}</p>
+    </div>
+    <details class="fila-ver"><summary>Ver a mensagem</summary><pre>${esc(x.msg)}</pre></details>
+    <div class="fila-acoes">
+      <a class="btn btn-primary" id="filaAbrir" href="${linkWa(x.num, x.msg)}" target="${alvo}" rel="noopener">Abrir WhatsApp de ${esc(x.nome.split(' ')[0])}</a>
+      <button type="button" class="btn btn-ghost btn-sm" data-fila="saltar">Saltar</button>
+    </div>
+    ${listaHtml}`;
+}
+
+el('campanhas').addEventListener('click', e => {
+  const b = e.target.closest('[data-camp]');
+  if (!b || b.disabled) return;
+  const camp = b.dataset.camp;
+  const itens = CAMPANHAS[camp].itens();
+  const feitos = lerEnviados(camp);
+  const i = itens.findIndex(x => !feitos.has(x.id));
+  fila = { camp, itens, i: i < 0 ? itens.length : i, feitos };
+  renderEnvios();
+  el('fila').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
+
+function proximo() {
+  let j = fila.i + 1;
+  while (j < fila.itens.length && fila.feitos.has(fila.itens[j].id)) j++;
+  fila.i = j;
+}
+el('fila').addEventListener('click', e => {
+  if (!fila) return;
+  const a = e.target.closest('#filaAbrir');
+  if (a) {
+    const x = fila.itens[fila.i];
+    fila.feitos.add(x.id); gravarEnviados(fila.camp, fila.feitos);
+    if (x.depois && x.r && x.r.estado !== x.depois) gravarEstado(x.r, x.depois, true);
+    // deixa o navegador abrir o link e só depois avança
+    setTimeout(() => { proximo(); renderEnvios(); }, 300);
+    return;
+  }
+  const ir = e.target.closest('[data-ir]');
+  if (ir) { fila.i = Number(ir.dataset.ir); renderFila(); return; }
+  const f = e.target.closest('[data-fila]');
+  if (!f) return;
+  if (f.dataset.fila === 'fechar') { fila = null; renderEnvios(); }
+  if (f.dataset.fila === 'saltar') { proximo(); renderFila(); }
+});
 /* abrir no WhatsApp Web (ex.: conta Business ligada no navegador) ou na aplicação */
 let usarWeb = false;
 try { usarWeb = localStorage.getItem('ecoai-wa-web') === '1'; } catch (_) {}
@@ -272,7 +437,7 @@ el('optWeb').checked = usarWeb;
 el('optWeb').addEventListener('change', e => {
   usarWeb = e.target.checked;
   try { localStorage.setItem('ecoai-wa-web', usarWeb ? '1' : '0'); } catch (_) {}
-  renderTabela();
+  renderTabela(); renderEnvios();
   toast(usarWeb ? 'As mensagens abrem no WhatsApp Web' : 'As mensagens abrem na aplicação');
 });
 
@@ -316,19 +481,23 @@ el('linhas').addEventListener('change', async e => {
   if (!s) return;
   const r = linhas.find(x => String(x.linha) === s.dataset.linha);
   if (!r) return;
-  r.estado = s.value;
+  gravarEstado(r, s.value);
+});
+
+async function gravarEstado(r, estado, calado) {
+  r.estado = estado;
   render();
-  if (demo) { toast('Exemplo: o estado não foi gravado'); return; }
+  if (demo) { if (!calado) toast('Exemplo: o estado não foi gravado'); return; }
   try {
     await fetch(CONFIG.sheetUrl, {
       method: 'POST', mode: 'no-cors',
-      body: new URLSearchParams({ acao: 'estado', chave, linha: r.linha, estado: r.estado })
+      body: new URLSearchParams({ acao: 'estado', chave, linha: r.linha, estado })
     });
-    toast(`${r.nome.split(' ')[0]}: ${r.estado}`);
+    if (!calado) toast(`${r.nome.split(' ')[0]}: ${estado}`);
   } catch (_) {
     toast('Não foi possível gravar. Verifica a internet.');
   }
-});
+}
 
 /* ---------- exportar ---------- */
 el('btnCsv').addEventListener('click', () => {
