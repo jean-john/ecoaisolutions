@@ -946,3 +946,7 @@ code { font-family: var(--f-mono); font-size: .88em; background: var(--surface-2
 .fila-lista li.feito .link-btn { color: var(--ink-soft); }
 .fila-lista li.atual .link-btn { font-weight: 700; color: var(--green); }
 .fila-fim { font-weight: 700; margin: 4px 0 12px; }
+.envio-todos { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); }
+.envio-todos p { margin: 0 0 10px; font-size: 14.5px; color: var(--ink-soft); }
+.envio-todos p b { color: var(--ink); }
+.envio-todos-acoes { display: flex; flex-wrap: wrap; gap: 10px; }

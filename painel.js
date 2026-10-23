@@ -263,6 +263,25 @@ Se tiveres alguma dúvida, ou se precisares de mais tempo para pagar, diz-nos à
   if (PAGOS.includes(r.estado)) return msgGrupo(r);
   return `Olá ${nome}, daqui fala a ECOAI SOLUTIONS.`;
 }
+/* ---------- enviar a todos: contactos (.vcf) + mensagem sem nome ---------- */
+const pendentesComNum = () => linhas.filter(r => r.estado === 'Pendente' && waNum(r.telefone));
+el('btnVcf').addEventListener('click', () => {
+  const lista = pendentesComNum();
+  if (!lista.length) { toast('Não há pendentes com número válido'); return; }
+  const limpa = s => String(s || '').replace(/[\r\n;,]/g, ' ').trim();
+  const vcf = lista.map(r => ['BEGIN:VCARD', 'VERSION:3.0', `FN:${limpa(r.nome)} (C++ ECOAI)`, `N:;${limpa(r.nome)} (C++ ECOAI);;;`, `TEL;TYPE=CELL:+${waNum(r.telefone)}`, 'END:VCARD'].join('\r\n')).join('\r\n');
+  const url = URL.createObjectURL(new Blob([vcf], { type: 'text/vcard;charset=utf-8' }));
+  const a = Object.assign(document.createElement('a'), { href: url, download: `pendentes-cpp-${chaveDia(new Date())}.vcf` });
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  toast(`${lista.length} contactos descarregados`);
+});
+el('btnCopiarGeral').addEventListener('click', async () => {
+  const txt = msgWhats({ nome: '', estado: 'Pendente' }).replace(/^Olá\s*!/, 'Olá!');
+  try { await navigator.clipboard.writeText(txt); toast('Mensagem copiada. Cola-a na lista de transmissão.'); }
+  catch (_) { prompt('Copia a mensagem:', txt); }
+});
+
 function diasAte() { return Math.max(0, Math.ceil((Date.parse(INICIO) - Date.now()) / 864e5)); }
 function msgGrupo(r) {
   const nome = (r.nome || '').split(' ')[0];
