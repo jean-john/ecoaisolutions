@@ -466,7 +466,10 @@ function waNum(t) {
   let d = primeiro.replace(/\D/g, '');
   if (d.startsWith('00')) d = d.slice(2);
   if (d.length === 9) d = '258' + d;
-  return d.length === 12 && d.startsWith('258') ? d : '';
+  if (d.length === 12 && d.startsWith('258')) return d;
+  // números estrangeiros escritos com indicativo (ex.: +48 793 186 030)
+  const internacional = /^\s*(\+|00)/.test(primeiro) && !d.startsWith('258');
+  return internacional && d.length >= 10 && d.length <= 15 ? d : '';
 }
 
 function renderTabela() {
