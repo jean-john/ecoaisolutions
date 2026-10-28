@@ -81,9 +81,10 @@
         <h2>Angariadores</h2>
         <p class="bloco-sub">100 MT por cada pessoa indicada que pagou</p>
       </div>
+      <p class="ang-resumo" id="angResumo"></p>
       <div class="tabela-wrap">
         <table class="tabela tabela-ang">
-          <thead><tr><th>Quem indicou</th><th>Indicados</th><th>Já pagaram</th><th>A receber</th><th>Nomes</th></tr></thead>
+          <thead><tr><th>Quem indicou</th><th>Indicados</th><th>Pagaram</th><th>Comissão</th><th>Já enviada</th><th>Por enviar</th><th>Nomes</th><th></th></tr></thead>
           <tbody id="angLinhas"></tbody>
         </table>
       </div>
@@ -138,6 +139,7 @@
   </section>
 </main>
 
+<div class="pos-accao" id="posAccao" role="dialog" aria-live="polite" hidden></div>
 <div class="toast" id="toast" role="status" hidden></div>
 
 <script src="script.js"></script>

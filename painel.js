@@ -10,6 +10,8 @@ const INICIO = '2026-11-02';  // primeira aula
 const ESTADOS = ['Pendente', 'Pago', 'Link enviado', 'Desistiu'];
 const PAGOS = ['Pago', 'Link enviado'];
 const COMISSAO = 100;   // MT por indicado que pagou
+const SEM_COMISSAO = ['jean marie john'];   // a equipa não recebe comissão
+const MARCA_PAGA = /comiss[aã]o paga/i;     // escrito nas notas do indicado quando os 100 MT já foram enviados
 
 const el = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -116,7 +118,8 @@ function render() {
     ['Inscritos', ativos.length, `meta: ${META} vagas`],
     ['Pagos', pagos.length, `${pct(pagos.length, ativos.length)}% dos inscritos`],
     ['Por pagar', pendentes.length, pendentes.length ? 'falta contactar ou confirmar' : 'tudo em dia'],
-    ['Receita confirmada', mt(pagos.length * PRECO), `prevista: ${mt(ativos.length * PRECO)}`],
+    (() => { const f = financas(); return ['Receita líquida', mt(f.liquida), `bruta ${mt(f.bruta)} − comissões ${mt(f.comissoes)}`]; })(),
+    (() => { const f = financas(); return ['Comissões', mt(f.comissoes), f.porPagar ? `${mt(f.porPagar)} por enviar aos angariadores` : 'todas enviadas ✓']; })(),
     ['Faltam', faltam + (faltam === 1 ? ' dia' : ' dias'), 'para 2 de Novembro']
   ].map(([t, v, s]) => `<div class="kpi"><span class="kpi-t">${t}</span><b class="kpi-v">${esc(v)}</b><span class="kpi-s">${esc(s)}</span></div>`).join('');
 
@@ -145,23 +148,75 @@ function indicadoPor(r) {
   const x = String(r.observacoes || '').match(/Indicado por:\s*([^.]+)\./);
   return x ? x[1].trim() : '';
 }
-function renderAngariadores(ativos) {
+/* ---------- angariadores e comissões ---------- */
+function grupoAngariadores() {
+  const ativos = linhas.filter(r => r.estado !== 'Desistiu');
   const grupos = new Map();
   ativos.forEach(r => {
     const quem = indicadoPor(r);
     if (!quem) return;
     const tel = quem.replace(/\D/g, '').slice(-9);
-    const chave = tel.length === 9 ? tel : quem.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ');
-    if (!grupos.has(chave)) grupos.set(chave, { nome: quem, lista: [] });
-    grupos.get(chave).lista.push(r);
+    const k = tel.length === 9 ? tel : norm(quem.replace(/[\d+]/g, ' '));
+    if (!grupos.has(k)) grupos.set(k, { k, quem, lista: [] });
+    grupos.get(k).lista.push(r);
   });
-  el('blocoAng').hidden = !grupos.size;
-  el('angLinhas').innerHTML = [...grupos.values()]
-    .map(g => ({ ...g, pagos: g.lista.filter(r => PAGOS.includes(r.estado)).length }))
-    .sort((a, b) => b.pagos - a.pagos || b.lista.length - a.lista.length)
-    .map(g => `<tr><td><b>${esc(g.nome)}</b></td><td>${g.lista.length}</td><td>${g.pagos}</td><td><b>${mt(g.pagos * COMISSAO)}</b></td><td><small>${g.lista.map(r => esc(r.nome) + (PAGOS.includes(r.estado) ? ' ✓' : '')).join(', ')}</small></td></tr>`)
-    .join('');
+  const primeiro = n => (n || '').split(' ')[0];
+  return [...grupos.values()].map(g => {
+    const nomeQuem = g.quem.replace(/[\d+]/g, ' ').replace(/[-–·,]+\s*$/, '').replace(/\s+/g, ' ').trim() || g.quem;
+    const p = norm(nomeQuem).split(' ');
+    // o número que a própria pessoa escreveu na inscrição é mais fiável do que o escrito por quem foi indicado
+    const inscrito = p.length > 1 && linhas.find(r => { const n = ' ' + norm(r.nome) + ' '; return n.includes(' ' + p[0] + ' ') && n.includes(' ' + p.at(-1) + ' '); });
+    const equipa = SEM_COMISSAO.some(x => norm(nomeQuem).includes(x));
+    const pagos = g.lista.filter(r => PAGOS.includes(r.estado));
+    const jaPagas = pagos.filter(r => MARCA_PAGA.test(r.notas || ''));
+    const porPagar = equipa ? [] : pagos.filter(r => !MARCA_PAGA.test(r.notas || ''));
+    return {
+      ...g, nomeQuem, inscrito, equipa, pagos, jaPagas, porPagar,
+      primeiro: primeiro(nomeQuem),
+      num: (inscrito && waNum(inscrito.telefone)) || waNum(g.quem),
+      tel: (inscrito && inscrito.telefone) || g.quem.replace(/[^\d+]/g, ''),
+      devido: equipa ? 0 : pagos.length * COMISSAO
+    };
+  }).sort((a, b) => b.pagos.length - a.pagos.length || b.lista.length - a.lista.length);
 }
+function financas() {
+  const pagos = linhas.filter(r => r.estado !== 'Desistiu' && PAGOS.includes(r.estado));
+  const G = grupoAngariadores();
+  const comissoes = G.reduce((t, g) => t + g.devido, 0);
+  const porPagar = G.reduce((t, g) => t + g.porPagar.length * COMISSAO, 0);
+  const bruta = pagos.length * PRECO;
+  return { bruta, comissoes, porPagar, enviadas: comissoes - porPagar, liquida: bruta - comissoes };
+}
+function renderAngariadores() {
+  const G = grupoAngariadores();
+  el('blocoAng').hidden = !G.length;
+  const f = financas();
+  el('angResumo').innerHTML = `Comissões: <b>${mt(f.comissoes)}</b> no total · <b>${mt(f.enviadas)}</b> já enviados · <b>${mt(f.porPagar)}</b> por enviar`;
+  el('angLinhas').innerHTML = G.map(g => {
+    const estado = g.equipa ? '<small>equipa · sem comissão</small>'
+      : g.porPagar.length ? `<button type="button" class="btn btn-primary btn-sm" data-pagar="${esc(g.k)}">Já enviei ${mt(g.porPagar.length * COMISSAO)}</button>`
+      : g.pagos.length ? '<span class="ok-pago">Tudo enviado ✓</span>' : '<small>à espera do pagamento</small>';
+    return `<tr><td><b>${esc(g.nomeQuem)}</b>${g.tel ? `<br><small>${esc(g.tel)}</small>` : ''}</td><td>${g.lista.length}</td><td>${g.pagos.length}</td>
+      <td>${mt(g.devido)}</td><td>${mt(g.jaPagas.length * COMISSAO)}</td><td><b>${mt(g.porPagar.length * COMISSAO)}</b></td>
+      <td><small>${g.lista.map(r => esc(r.nome) + (PAGOS.includes(r.estado) ? ' ✓' : '')).join(', ')}</small></td><td>${estado}</td></tr>`;
+  }).join('');
+}
+el('angLinhas').addEventListener('click', async e => {
+  const b = e.target.closest('[data-pagar]');
+  if (!b) return;
+  const g = grupoAngariadores().find(x => x.k === b.dataset.pagar);
+  if (!g || !g.porPagar.length) return;
+  const valor = g.porPagar.length * COMISSAO;
+  if (!confirm(`Confirmas que já enviaste ${mt(valor)} a ${g.nomeQuem}?`)) return;
+  const hoje = new Date().toLocaleDateString('pt-PT', { day: '2-digit', month: '2-digit' });
+  const nomes = g.porPagar.map(r => r.nome.split(' ')[0]);
+  for (const r of g.porPagar) await gravarNotas(r, `${(r.notas || '').trim()} [comissão paga ${hoje}]`.trim());
+  render();
+  if (g.num) {
+    const msg = `Olá ${g.primeiro}! 😊 A equipa da ECOAI SOLUTIONS acabou de te enviar ${mt(valor)}: a tua comissão por teres trazido ${lista(nomes)} para o curso de C++. Muito obrigado! 🙏\n\nConfirma por favor que recebeste. E lembra-te: cada nova pessoa que trouxeres e que pague são mais ${COMISSAO} MT para ti. 💙`;
+    abrirPosAccao(`Comissão de ${g.nomeQuem} marcada como enviada.`, [{ t: `Avisar ${g.primeiro} no WhatsApp`, href: linkWa(g.num, msg) }]);
+  } else toast('Comissão marcada como enviada');
+});
 
 function barras(titulo, dados, total) {
   const max = Math.max(1, ...dados.map(d => d[1]));
@@ -307,35 +362,21 @@ el('linkGrupo').addEventListener('input', () => {
 });
 
 function lista(nomes) { return nomes.length < 2 ? nomes.join('') : nomes.slice(0, -1).join(', ') + ' e ' + nomes.at(-1); }
-function angariadores() {
-  const ativos = linhas.filter(r => r.estado !== 'Desistiu');
-  const grupos = new Map();
-  ativos.forEach(r => {
-    const quem = indicadoPor(r);
-    if (!quem) return;
-    const tel = quem.replace(/\D/g, '').slice(-9);
-    const k = tel.length === 9 ? tel : norm(quem);
-    if (!grupos.has(k)) grupos.set(k, { quem, lista: [] });
-    grupos.get(k).lista.push(r);
-  });
-  return [...grupos.entries()].map(([k, g]) => {
-    const nomeQuem = g.quem.replace(/[\d+]/g, ' ').replace(/[-–·,]+\s*$/, '').replace(/\s+/g, ' ').trim();
-    const p = norm(nomeQuem).split(' ');
-    // o número que a própria pessoa escreveu na inscrição é mais fiável do que o escrito por quem foi indicado
-    const inscrito = p.length > 1 && linhas.find(r => { const n = ' ' + norm(r.nome) + ' '; return n.includes(' ' + p[0] + ' ') && n.includes(' ' + p.at(-1) + ' '); });
-    const num = (inscrito && waNum(inscrito.telefone)) || waNum(g.quem);
-    const pagos = g.lista.filter(r => PAGOS.includes(r.estado));
-    const primeiro = n => (n || '').split(' ')[0];
-    const nome = primeiro(nomeQuem);
-    const msg = pagos.length
-      ? `Olá ${nome}! 😊 A equipa da ECOAI SOLUTIONS quer agradecer-te por teres trazido ${lista(g.lista.map(r => primeiro(r.nome)))} para o curso de C++. ${pagos.length === 1 ? `O pagamento de ${primeiro(pagos[0].nome)} já foi confirmado` : `${pagos.length} já confirmaram o pagamento`}, por isso tens ${mt(pagos.length * COMISSAO)} a receber! 🎉
+function msgAngariador(g) {
+  const primeiro = n => (n || '').split(' ')[0];
+  return g.pagos.length
+    ? `Olá ${g.primeiro}! 😊 A equipa da ECOAI SOLUTIONS quer agradecer-te por teres trazido ${lista(g.lista.map(r => primeiro(r.nome)))} para o curso de C++. ${g.pagos.length === 1 ? `O pagamento de ${primeiro(g.pagos[0].nome)} já foi confirmado` : `${g.pagos.length} já confirmaram o pagamento`}, por isso tens ${mt(g.pagos.length * COMISSAO)} a receber, que te vamos enviar brevemente! 🎉
 
 Conheces mais alguém que queira aprender a programar? Cada pessoa que trouxeres e que pague são mais ${COMISSAO} MT para ti. Obrigado por acreditares em nós! 🙏`
-      : `Olá ${nome}! 😊 Obrigado por teres falado do curso de C++ a ${lista(g.lista.map(r => primeiro(r.nome)))}. Ficámos muito contentes! Assim que ${g.lista.length === 1 ? 'confirmar' : 'confirmarem'} o pagamento, recebes ${COMISSAO} MT por cada pessoa. 🎉
+    : `Olá ${g.primeiro}! 😊 Obrigado por teres falado do curso de C++ a ${lista(g.lista.map(r => primeiro(r.nome)))}. Ficámos muito contentes! Assim que ${g.lista.length === 1 ? 'confirmar' : 'confirmarem'} o pagamento, recebes ${COMISSAO} MT por cada pessoa. 🎉
 
 Se puderes dar um toque, ajudas muito. Obrigado! 🙏`;
-    return { id: 'ang-' + k, nome: nomeQuem || g.quem, tel: (inscrito && inscrito.telefone) || g.quem.replace(/[^\d+]/g, ''), num, msg, nota: pagos.length ? `${mt(pagos.length * COMISSAO)} a receber` : 'indicados ainda por pagar' };
-  }).filter(x => x.num);
+}
+function angariadores() {
+  return grupoAngariadores().filter(g => !g.equipa && g.num).map(g => ({
+    id: 'ang-' + g.k, nome: g.nomeQuem, tel: g.tel, num: g.num, msg: msgAngariador(g),
+    nota: g.porPagar.length ? `${mt(g.porPagar.length * COMISSAO)} por enviar` : g.pagos.length ? 'comissão já enviada' : 'indicados ainda por pagar'
+  }));
 }
 
 const CAMPANHAS = {
@@ -503,8 +544,41 @@ el('linhas').addEventListener('change', async e => {
   if (!s) return;
   const r = linhas.find(x => String(x.linha) === s.dataset.linha);
   if (!r) return;
+  const antes = r.estado;
   gravarEstado(r, s.value);
+  if (s.value === 'Pago' && antes !== 'Pago') aposPago(r);
 });
+
+async function gravarNotas(r, notas) {
+  r.notas = notas;
+  if (demo) return;
+  try {
+    await fetch(CONFIG.sheetUrl, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ acao: 'estado', chave, linha: r.linha, notas }) });
+  } catch (_) { toast('Não foi possível gravar. Verifica a internet.'); }
+}
+
+/* depois de marcar alguém como Pago: oferecer as mensagens certas, já escritas */
+function abrirPosAccao(titulo, botoes) {
+  const box = el('posAccao');
+  const alvo = usarWeb ? 'ecoai-whatsapp' : '_blank';
+  box.innerHTML = `<p><b>${esc(titulo)}</b></p><div class="pos-botoes">${botoes.map(b => `<a class="btn btn-primary btn-sm" href="${b.href}" target="${alvo}" rel="noopener">${esc(b.t)}</a>`).join('')}<button type="button" class="btn btn-ghost btn-sm" data-fechar>Fechar</button></div>`;
+  box.hidden = false;
+}
+el('posAccao').addEventListener('click', e => {
+  if (e.target.closest('[data-fechar]')) { el('posAccao').hidden = true; return; }
+  if (e.target.closest('a')) setTimeout(() => { el('posAccao').hidden = true; }, 400);
+});
+function aposPago(r) {
+  const botoes = [];
+  const num = waNum(r.telefone);
+  if (num) botoes.push({ t: `Confirmar a ${r.nome.split(' ')[0]} e enviar o link do grupo`, href: linkWa(num, msgGrupo(r)) });
+  const quem = indicadoPor(r);
+  if (quem) {
+    const g = grupoAngariadores().find(x => x.lista.includes(r));
+    if (g && !g.equipa && g.num) botoes.push({ t: `Avisar ${g.primeiro} (angariador) dos ${COMISSAO} MT`, href: linkWa(g.num, msgAngariador(g)) });
+  }
+  if (botoes.length) abrirPosAccao(`${r.nome.split(' ')[0]} pagou! Envia as mensagens:`, botoes);
+}
 
 async function gravarEstado(r, estado, calado) {
   r.estado = estado;
