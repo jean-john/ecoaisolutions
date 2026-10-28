@@ -18,7 +18,7 @@
  * E uma única vez: escolher a função "instalarLembretes" no topo e carregar em Executar (autorizar o envio de emails).
  */
 
-const CHAVE = '1234';
+const CHAVE = 'MUDAR-ESTA-PALAVRA-PASSE';   // põe a palavra-passe SÓ no Apps Script da Google, nunca aqui no GitHub
 
 const CAMPOS = ['nome', 'telefone', 'email', 'idade', 'localidade', 'ocupacao', 'escolaridade',
   'experiencia', 'equipamento', 'horario', 'origem', 'observacoes', 'pagina'];
