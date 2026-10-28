@@ -18,7 +18,7 @@
  * E uma única vez: escolher a função "instalarLembretes" no topo e carregar em Executar (autorizar o envio de emails).
  */
 
-const CHAVE = 'MUDAR-ESTA-PALAVRA-PASSE';
+const CHAVE = '1234';
 
 const CAMPOS = ['nome', 'telefone', 'email', 'idade', 'localidade', 'ocupacao', 'escolaridade',
   'experiencia', 'equipamento', 'horario', 'origem', 'observacoes', 'pagina'];
